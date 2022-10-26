@@ -166,8 +166,11 @@ async function saveReport(req, res) {
   const {userId ,fullname,id,email,rolesss}=await req.currentUser;
   const {companyName ,equipment,modeType,avater,manufacturedYear,inspDate,nextInspDate,fleetNO,weight,manufacturer,capacity,location, sN,ref} = req.body;
   let avatar = req.files.avater;
-   var imageAsBase64 = fs.readFileSync(avatar.name);//reading file as binary data
-var base64String = new Buffer(imageAsBase64).toString("base64"); // convert to base64 string
+  console.log(avatar.data)
+   var imageAsBase64 =avatar.data;// fs.readFileSync(avatar.name);//reading file as binary data
+
+   console.log(imageAsBase64)
+      var base64String = new Buffer(imageAsBase64).toString("base64"); // convert to base64 string
   try{
   User.findOne({
     where: {
@@ -195,7 +198,7 @@ console.log(data)
       avater:base64String,
       inspDate:inspDate,
       nextInspDate:nextInspDate,
-      author:fullname
+      author: fullname
     }).then((data)=>{
 
       return res.status(200).send({
@@ -255,7 +258,7 @@ console.log(data)
         avater:base64String,
         inspDate:inspDate,
         nextInspDate:nextInspDate,
-        author:fullname
+        author: fullname
       }).then((data)=>{
 
         return res.status(200).send({
