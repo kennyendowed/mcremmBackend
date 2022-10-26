@@ -13,6 +13,11 @@ const Op = db.Sequelize.Op;
 const sequelize =db.Sequelize;
 const ServiceSkills = db.skills;
 var bcrypt = require("bcryptjs");
+const { resolve } = require("path");
+const fs = require("fs");
+
+
+
 
 async function allAccess(req, res) {
   res.status(200).json({
@@ -160,7 +165,10 @@ async function getStateCity(req, res) {
 async function saveReport(req, res) {
   const {userId ,fullname,id,email,rolesss}=await req.currentUser;
   const {companyName ,equipment,modeType,avater,manufacturedYear,inspDate,nextInspDate,fleetNO,weight,manufacturer,capacity,location, sN,ref} = req.body;
-try{
+  let avatar = req.files.avater;
+   var imageAsBase64 = fs.readFileSync(avatar.name);//reading file as binary data
+var base64String = new Buffer(imageAsBase64).toString("base64"); // convert to base64 string
+  try{
   User.findOne({
     where: {
       companyName: companyName          
@@ -184,7 +192,7 @@ console.log(data)
       capacity:capacity,
       weight:weight,
       manufacturedYear:manufacturedYear,
-      avater:avater,
+      avater:base64String,
       inspDate:inspDate,
       nextInspDate:nextInspDate,
       author:fullname
@@ -244,7 +252,7 @@ console.log(data)
         capacity:capacity,
         weight:weight,
         manufacturedYear:manufacturedYear,
-        avater:avater,
+        avater:base64String,
         inspDate:inspDate,
         nextInspDate:nextInspDate,
         author:fullname
