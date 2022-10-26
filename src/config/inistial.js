@@ -10,7 +10,7 @@ const ServiceSkills = db.skills;
 // In development, you may need to drop existing tables and re-sync database. So you can use force: true as code above.
 
 // For production, just insert these rows manually and use sync() without parameters to avoid dropping data:
-//b.sequelize.sync();
+//db.sequelize.sync();
 // db.sequelize.sync({ force: true }).then(() => {
 // initial();
 //   console.log("Drop and Resync Db");
@@ -36,7 +36,7 @@ function initial() {
 
   Role.create({
     id: 3,
-    name: "buyer",
+    name: "customer",
     is_permission: 3,
   });
 

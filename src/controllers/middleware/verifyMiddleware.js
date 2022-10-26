@@ -2,12 +2,9 @@ const db = require("../../models");
 const utils = require("../helpers/utils");
 const jwt = require("jsonwebtoken");
 const {
-  ProductInputValidation,
+  
   changePasswordValidation,
-  CategoryInputValidation,
-  SocialLoginValidation,
-  beneficiaryValidation,skillsInputValidation,
-  walletInputValidation,
+   SocialLoginValidation,InputValidation,
   saveTokenValidation,
   passwordResetValidation,
   registerValidation,
@@ -575,8 +572,8 @@ checkRolesExisted = (req, res, next) => {
   next();
 };
 
-VerifywalletInput = (req, res, next) => {
-  const { error } = walletInputValidation(req.body);
+verifyInput = (req, res, next) => {
+  const { error } = InputValidation(req.body);
   if (error)
     return res.status(400).json({
        status: "0",
@@ -590,75 +587,6 @@ VerifywalletInput = (req, res, next) => {
 
   next();
 };
-
-VerifybeneficiaryInput = (req, res, next) => {
-  const { error } = beneficiaryValidation(req.body);
-  if (error)
-    return res.status(400).json({
-       status: "0",
-      data: [
-        {
-          code: 400,
-          message: error.details[0].message,
-        },
-      ],
-    });
-
-  next();
-};
-
-VerifyCategoryInput = (req, res, next) => {
-  const { error } = CategoryInputValidation(req.body);
-  if (error)
-    return res.status(400).json({
-       status: "0",
-      data: [
-        {
-          code: 400,
-          message: error.details[0].message,
-        },
-      ],
-    });
-
-  Categorys.findOne({
-    where: {
-      name: req.body.name,
-    },
-  }).then((response) => {
-    if (response) {
-      res.status(404).send({
-         status: "0",
-        data: [
-          {
-            code: 404,
-            message: "category already exist",
-          },
-        ],
-      });
-      return;
-    }
-
-    next();
-  });
-};
-
-VerifyCategoryInputs = (req, res, next) => {
-  const { error } = CategoryInputValidation(req.body);
-  if (error)
-    return res.status(400).json({
-       status: "0",
-      data: [
-        {
-          code: 400,
-          message: error.details[0].message,
-        },
-      ],
-    });
-
-  next();
-};
-
-
 
 
 
@@ -715,70 +643,6 @@ async function ChangePassword(req, res, next) {
   });
 }
 
-VerifyProductInput = (req, res, next) => {
-  const { error } = ProductInputValidation(req.body);
-  if (error)
-    return res.status(400).json({
-       status: "0",
-      data: [
-        {
-          code: 400,
-          message: error.details[0].message,
-        },
-      ],
-    });
-
-  Products.findOne({
-    where: {
-      name: req.body.name,
-    },
-  }).then((response) => {
-    if (response) {
-      res.status(404).send({
-         status: "0",
-        data: [
-          {
-            code: 404,
-            message: "Product already exist",
-          },
-        ],
-      });
-      return;
-    }
-
-    next();
-  });
-};
-
-verifyskillsInput = async (req, res, next) => {
-  const ServiceSkillsexists = await ServiceSkills.findOne({ where: {name: req.body.title } });
-
-  const { error } = skillsInputValidation(req.body);
-  if (error)
-    return res.status(400).json({
-       status: "0",
-      data: [
-        {
-          code: 400,
-          message: error.details[0].message,
-        },
-      ],
-    });
-
-    if (ServiceSkillsexists) {
-      return res.status(400).send({
-          status: "0",
-         data: [
-           {
-             code: 400,
-             message: "💩 Failed! Skill name already in use! ❌",
-           },
-         ],
-       });
-     }
-      next();
-};
-
 
 
 const verifyMiddleware = {
@@ -794,14 +658,9 @@ const verifyMiddleware = {
   VerifypasswordReset: VerifypasswordReset,
   VerifyResendOtp: verifyResendOtp,
   VerifysaveToken: VerifysaveToken,
-  VerifywalletInput: VerifywalletInput,
-  VerifybeneficiaryInput: VerifybeneficiaryInput,
+  verifyInput: verifyInput,
   verifySocialLogin: verifySocialLogin,
-  VerifyCategoryInput: VerifyCategoryInput,
-  VerifyCategoryInputs: VerifyCategoryInputs,
-  VerifyProductInput: VerifyProductInput,
-  VerifyProfileStatus:VerifyProfileStatus,
-  verifyskillsInput:verifyskillsInput
+  VerifyProfileStatus:VerifyProfileStatus
 };
 
 module.exports = verifyMiddleware;

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { authJwt } = require("../controllers/middleware");
+const { verifyMiddleware } = require("../controllers/middleware");
 const controller = require("../controllers/WelcomeController");
 
 router.use(function(req, res, next) {
@@ -13,16 +14,12 @@ router.use(function(req, res, next) {
 router.get("/", controller.allAccess);
  //encrypt user data
  router.post("/encrypt", controller.encrypt);
-
- router.get("/getSkills", controller.getSkills);
+ router.post("/AddReport", [verifyMiddleware.VerifyActive,authJwt.verifyToken,verifyMiddleware.verifyInput], controller.saveReport);
   router.post("/dencrypt", controller.dencrypt);
   router.get("/getCountry", controller.getCountry);
   router.get("/getCountryState/:id", controller.getCountryState);
 router.get("/getStateCity/:id/:state", controller.getStateCity);
-router.get("/getServices", controller.getServices);
-router.get("/searchSubServices/:subService", controller.filterSubServices);
-router.get("/getActiveServices", controller.getActiveServices);
-router.get("/getActiveSubServicesSeller/:service/:subService", controller.getActiveSubServicesSeller);
+router.get("/getReport", controller.getReport);
 
 
 module.exports=router;

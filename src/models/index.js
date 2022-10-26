@@ -70,6 +70,7 @@ db.sequelize = sequelize;
 
 db.audit_logs = require("../models/audit_logs.js")(sequelize, Sequelize);
 db.user = require("./Muser.js")(sequelize, Sequelize);
+db.surveyReport = require("../models/surveyReport.js")(sequelize, Sequelize);
 db.User_Login = require("../models/User_Login.js")(sequelize, Sequelize);
 db.role = require("../models/role.js")(sequelize, Sequelize);
 // db.individualDetails = require("../models/individualDetails.js")(sequelize, Sequelize);
@@ -100,6 +101,13 @@ db.User_Login.belongsTo(db.user, {
   constraints: false,
 });
 
+db.surveyReport.belongsTo(db.user, {
+  as: "organisation_details",
+  foreignKey: "user_id",
+  targetKey: "user_id",
+  constraints: false
+});
+
 // db.user.belongsTo(db.individualDetails, {
 //   as: "individualdetails",
 //   foreignKey: "user_id",
@@ -114,12 +122,7 @@ db.User_Login.belongsTo(db.user, {
 //   constraints: false
 // });
 
-// db.organisationDetails.belongsTo(db.user, {
-//   as: "User_organisation_details",
-//   foreignKey: "user_id",
-//   targetKey: "user_id",
-//   constraints: false
-// });
+
 
 // db.organisationDetails.belongsTo(db.services, {
 //   as: "service_details",

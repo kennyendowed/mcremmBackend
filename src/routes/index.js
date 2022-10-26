@@ -2,8 +2,6 @@
 const WelcomeRoute=require('./welcomeRoute');
 const rateLimit =require('express-rate-limit');
 const authRoute=require('./authentication/authRoute');
-const SellerauthRoute=require('./seller/sellerRoute');
-const BuyerauthRoute=require('./buyer/buyerRoute');
  const StaffauthRoute=require('./staff/staffRoute');
 const AdminauthRoute=require('./admin/adminRoute');
 const path = require('path');
@@ -26,8 +24,6 @@ app.use(limit)// Setting limit on specific route
 app.use('/',WelcomeRoute);
 app.use('/api',WelcomeRoute);
 app.use('/api/auth',authRoute); 
-app.use('/api/seller',SellerauthRoute);
-app.use('/api/buyer',BuyerauthRoute);
 app.use('/api/staff',StaffauthRoute);
 app.use('/api/admin',AdminauthRoute);
 

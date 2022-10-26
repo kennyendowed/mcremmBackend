@@ -11,45 +11,67 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    profileType: {
+    ref: {
       type: Sequelize.STRING,
       allowNull: true,
     }, 
-    serviceCategory: {
+    equipment: {
       type: Sequelize.STRING,
       allowNull: true,
     },
-    subServiceCategory: {
-      //      type: Sequelize.TEXT('long'),
-      type: Sequelize.JSON,
-      allowNull: true,
-    },
-    ServiceSkills: {
-      type: Sequelize.JSON,
-      allowNull: true,
-    },
-    experinceLevel: {
+    sN: {
       type: Sequelize.STRING,
       allowNull: true,
     },
-    education: {
-      type: Sequelize.JSON,
+    modeType: {
+      type: Sequelize.STRING,
       allowNull: true,
     },
-    WorkHistory: {
-      type: Sequelize.JSON,
+    fleetNO: {
+      type: Sequelize.STRING,
       allowNull: true,
     },
-    achievement: {
-      type: Sequelize.JSON,
-      allowNull: true,
-    },
-    profileOverview: {
-      type: Sequelize.JSON,
+    manufacturer: {
+      type: Sequelize.STRING,
       allowNull: true,
     },
     location: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    capacity: {
+      type: Sequelize.STRING,
+      defaultValue:`[]`,
+      get: function() {
+        return JSON.parse(this.getDataValue('capacity'));
+    }, 
+    set: function(val) {
+        return this.setDataValue('capacity', JSON.stringify(val));
+    },
+      allowNull: true,
+    },
+      weight: {
       type: Sequelize.JSON,
+      allowNull: true,
+    },   
+    manufacturedYear: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    avater: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    }, 
+    inspDate: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    nextInspDate: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    author: {
+      type: Sequelize.STRING,
       allowNull: true,
     }
   });

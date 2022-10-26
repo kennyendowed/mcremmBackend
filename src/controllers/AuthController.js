@@ -255,6 +255,7 @@ async function signin(req, res) {
       var mail_val = {
         id: user.id,
         userId: user.user_id,
+        fullname: user.first_name + " " + user.last_name,
         email: user.email,
         phone: user.phone,
         avater: user.avater,
@@ -328,6 +329,7 @@ async function signin(req, res) {
             {
               id: user.id,
               email: user.email,
+              fullname: user.first_name + " " + user.last_name,
               phone:user.phone,
               accessToken: token,
               roles: authorities,
@@ -659,7 +661,7 @@ async function socialSignin(req, res) {
 }
 
 async function saveToken(req, res) {
-  var {userId ,id,email,rolesss}=await req.currentUser;
+  const {userId ,fullname,id,email,rolesss}=await req.currentUser;
 
   try {
     User.findOne({

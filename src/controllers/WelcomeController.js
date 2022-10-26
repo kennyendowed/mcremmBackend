@@ -7,11 +7,12 @@ const algorithm = "aes-128-cbc";
 const Securitykey = "zAL7X5AVRm8l4Ifs";
 const initVector = "BE/s3V0HtpPsE+1x";
 const User = db.user;
-const categoryService =db.services;
+const surveyReport =db.surveyReport;
 const organisationDetails =db.organisationDetails;
 const Op = db.Sequelize.Op;
 const sequelize =db.Sequelize;
 const ServiceSkills = db.skills;
+var bcrypt = require("bcryptjs");
 
 async function allAccess(req, res) {
   res.status(200).json({
@@ -152,168 +153,130 @@ async function getStateCity(req, res) {
 }
 
 
-async function getSkills(req, res) {
-  try {
-    ServiceSkills.findAll({ attributes: {
-      exclude: ["createdAt", "updatedAt", "is_deleted"],
-    },}).then((data) => {
-    if(data) {
-      return   res.status(200).send({
-        status: "1",
-        code: 200,
-        data: data
-      });
-    }
-    else{
-      return   res.status(404).send({
-        status: "0",
-        data: [
-          {
-            code: 404,
-          data: "💩 No active service ❌",
-          },
-        ],
-      });
-    }
- 
-  });
-  } catch (error) {
-    return res.status(500).send({
-      status: "0",
-      data: [
-        {
-          code: 500,
-          message: "💩 Whoops, looks like something went wrong",
-          developerMessage: error.message,
-        },
-      ],
-    });
-  }
-
-}
 
 
-async function getServices(req, res) {
-  try {
-    categoryService.findAll({}).then((data) => {
-     var Data =[];
-     var NewData =[];
-for (let index = 0; index < data.length; index++) {
-   Data = {
-    'name': data[index].name,  
-    'value': data[index].value,  
-    'icon': data[index].icon 
-   };
-  // console.log(Data)
- NewData.push(Data);
-}  
-
- return   res.status(200).send({
-      status: "1",
-      code: 200,
-      data: NewData,
-     
-    });
-  });
-  } catch (error) {
-    return res.status(500).send({
-      status: "0",
-      data: [
-        {
-          code: 500,
-          message: "💩 Whoops, looks like something went wrong",
-          developerMessage: error.message,
-        },
-      ],
-    });
-  }
-}
 
 
-async function getActiveServices(req, res) {
-  try {
-    // categoryService.findAll({}).then((data) => {
-    //  var Data =[];
-    //  var NewData =[];
-    organisationDetails.findAll({
-      attributes: ["serviceCategory"],
-      group: ["serviceCategory"],
-      distinct: true,
-      include: [
-        {
-          model: categoryService,       
-          as: "service_details",
-        },
-      
-      ],
-
-    }).then((data) => {
-      console.log(data)
-if(data ==""){
-  return   res.status(404).send({
-    status: "0",
-    data: [
-      {
-        code: 404,
-      data: "💩 No active service ❌",
-      },
-    ],
-  });
-}else{
-  return   res.status(200).send({
-    status: "1",
-    data: [
-      {
-        code: 200,
-      data: data,
-      },
-    ],
-  });
-}
-  });
-  } catch (error) {
-    return res.status(500).send({
-      status: "0",
-      data: [
-        {
-          code: 500,
-          message: "💩 Whoops, looks like something went wrong ❌",
-          developerMessage: error.message,
-        },
-      ],
-    });
-  }
-}
-
-async function getActiveSubServicesSeller(req, res) {
-  const {service , subService} = req.params;
+async function saveReport(req, res) {
+  const {userId ,fullname,id,email,rolesss}=await req.currentUser;
+  const {companyName ,equipment,modeType,avater,manufacturedYear,inspDate,nextInspDate,fleetNO,weight,manufacturer,capacity,location, sN,ref} = req.body;
 try{
-  organisationDetails.findAll({
+  User.findOne({
     where: {
-      subServiceCategory: sequelize.where(sequelize.fn('LOWER', sequelize.col('subServiceCategory')), 'LIKE', '%' + subService.toLowerCase() + '%'),
-     serviceCategory: service,           
+      companyName: companyName          
     },
     attributes: {
       exclude: ["createdAt", "updatedAt", "is_deleted"],
-    },
-    include: [
-      {
-        model: User,       
-        as: "User_organisation_details",
-        attributes: ["companyName", "companydescription", "companydateFounded", "companyphoneNumber", "companycontactPersonFirstName","companyprofileImage","companycontactPersonLastName","companycacDocumentImage"],
-      },    
-    ],
+    }   
   }).then((data) => {
-    return   res.status(200).send({
-      status: "1",
-      data: [
-        {
-          code: 200,
-        data: data 
-        ,
-        },
-      ],
+console.log(data)
+  if(data !=null){
+    surveyReport.create({
+      user_id: data.user_id,
+      ref:ref,
+      companyName: companyName,
+      equipment:equipment,
+      sN:sN,
+      modeType:modeType,
+      fleetNO:fleetNO,
+      manufacturer:manufacturer,
+      location:location,
+      capacity:capacity,
+      weight:weight,
+      manufacturedYear:manufacturedYear,
+      avater:avater,
+      inspDate:inspDate,
+      nextInspDate:nextInspDate,
+      author:fullname
+    }).then((data)=>{
+
+      return res.status(200).send({
+        status: "1",
+        message: "Report saved successfully ",
+       data: [
+         {
+           code: 200,
+           data: data,
+         },
+       ],
+     });
+
+
     });
+  }
+  else{
+    var ip =
+    (req.headers["x-forwarded-for"] || "").split(",").pop().trim() ||
+    req.connection.remoteAddress ||
+    req.socket.remoteAddress ||
+    req.connection.socket.remoteAddress;
+    const userID = utils.randomPin(8);
+    const token = utils.randomPin(5); 
+   const Ptoken=utils.randomChar(3, "alpha").toUpperCase() + + utils.randomChar(2, "nozero");
+   
+    User.create({
+      user_id: userID,
+      phone:"null",
+      first_name:companyName,
+      last_name: companyName,
+      companydescription:companyName+"company",
+      companyName:companyName,
+      avater: process.env.APP_ASSETS_URL + "assets/defaultmale.png",
+      email: "null",
+      email_time: utils.addMinutes(10),
+      email_code: token,
+      phone_time: utils.addMinutes(20),
+      phone_code: Ptoken,
+      phone_verify:"1",
+      is_permission: "2",
+      password: bcrypt.hashSync(companyName+"@"+userID, 8),
+      ip_address: ip,
+    }).then((data)=>{
+      surveyReport.create({
+        user_id: data.user_id,
+        ref:ref,
+        equipment:equipment,
+        sN:sN,
+        modeType:modeType,
+        fleetNO:fleetNO,
+        manufacturer:manufacturer,
+        location:location,
+        capacity:capacity,
+        weight:weight,
+        manufacturedYear:manufacturedYear,
+        avater:avater,
+        inspDate:inspDate,
+        nextInspDate:nextInspDate,
+        author:fullname
+      }).then((data)=>{
+
+        return res.status(200).send({
+          status: "1",
+          message: "Report saved successfully ",
+         data: [
+           {
+             code: 200,
+             data: data,
+           },
+         ],
+       });
+
+
+      });
+    }).catch((error)=>{
+      return res.status(500).send({
+        status: "0",
+        data: [
+          {
+            code: 500,
+            message: "💩 Whoops, looks like something went wrong ❌",
+            developerMessage: error.message,
+          },
+        ],
+      });
+    })
+  } 
+
 
   });
 
@@ -336,7 +299,7 @@ try{
 
 }
 
-async function filterSubServices(req,res){
+async function getReport(req,res){
   const {service , subService} = req.params;
   try{
     organisationDetails.findAll({
@@ -403,9 +366,8 @@ async function filterSubServices(req,res){
 module.exports = {
   allAccess,
   encrypt,
-  dencrypt,
-  getCountry,
-  getCountryState,getSkills,
-  getStateCity,filterSubServices,
-  getServices,getActiveServices,getActiveSubServicesSeller
+  dencrypt,saveReport,
+  getCountry,getReport,
+  getCountryState,
+  getStateCity
 };

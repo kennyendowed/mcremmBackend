@@ -105,28 +105,8 @@ const passwordResetValidation =(data)=>{
    return schema.validate(data);
 };
 
-//wallet creation verify
-const walletInputValidation = (data) => {
-  const schema =Joi.object({
-    narrations: Joi.string().min(3).required(),
-    amount: Joi.number().required(),
-    transactionReference: Joi.string().min(1).required(),
-      date: Joi.string().required(),
- 
-  });
- 
-     return schema.validate(data);
-};
-//beneficiary Validation
-const beneficiaryValidation = (data) => {
-  const schema =Joi.object({
-    name: Joi.string().min(3).required(),
-    number: Joi.number().min(10).required(),
- 
-  });
- 
-     return schema.validate(data);
-}
+
+
 //Social Login Validation
 const SocialLoginValidation = (data) => {
   const schema =Joi.object({
@@ -138,49 +118,52 @@ const SocialLoginValidation = (data) => {
      return schema.validate(data);
 }
 
-//Category Input Validation
-const CategoryInputValidation = (data) => {
-  const schema =Joi.object({
-    name: Joi.string().min(3).required().messages({
-      'any.required': 'Category {{#label}} is required',
-      'string.empty': 'Category {{#label}} is can not be empty',
-    }),
- 
-  });
- 
-     return schema.validate(data);
-}
 
-//Product in put validation
-const ProductInputValidation =(data)=>{
-  const schema =Joi.object({
-    name: Joi.string().min(3).required().messages({
-      'any.required': 'Category {{#label}} is required',
-      'string.empty': 'Category {{#label}} is can not be empty',
-    }),
-    description: Joi.string().min(3).required(),
-    quantity: Joi.number().required(),
-    price: Joi.number().required(),
-    // avater:Joi.required().messages({
-    //   'any.required': 'Product {{#label}} is required',
-    //   'string.empty': 'Product {{#label}} is can not be empty',
-    // })
-  });
- 
-     return schema.validate(data);
-}
 
-const skillsInputValidation =(data)=>{
+
+const InputValidation =(data)=>{
   const schema =Joi.object({
-    title: Joi.string().min(3).required().messages({
-      'any.required': 'skill  {{#label}} is required',
-      'string.empty': 'skill {{#label}} is can not be empty',
-    })   
+    companyName: Joi.string().min(3).required().messages({
+      'any.required': 'customer name is required',
+      'string.empty': 'customer name  is can not be empty',
+    }),
+    weight: Joi.string().optional().allow(''),
+    equipment: Joi.string().required(),
+    ref: Joi.string().required().messages({
+      'any.required': 'reference number is required',
+      'string.empty': 'reference number  is can not be empty',
+    }),
+    sN: Joi.string().required(),
+    modeType: Joi.string().required().messages({
+      'any.required': 'model / type is required',
+      'string.empty': 'model / type is can not be empty',
+    }),
+    fleetNO: Joi.string().required().messages({
+      'any.required': 'fleet number is required',
+      'string.empty': 'fleet number  is can not be empty',
+    }),
+    avater: Joi.string().optional().allow(''),
+   manufacturedYear: Joi.string().required().messages({
+    'any.required': 'manufactured year is required',
+    'string.empty': 'manufactured year  is can not be empty',
+  }),
+    // payeeAddress: Joi.string().optional().allow(''),
+    location: Joi.string().required(),
+    manufacturer: Joi.string().required(),
+    capacity: Joi.string().required(),
+    nextInspDate: Joi.string().required().messages({
+      'any.required': 'next inspection date is required',
+      'string.empty': 'next inspection date  is can not be empty',
+    }),
+    inspDate: Joi.string().required().messages({
+      'any.required': 'inspection date is required',
+      'string.empty': 'inspection date is can not be empty',
+    }),  
   });
  
      return schema.validate(data);
 }
 
 module.exports={
-  ProductInputValidation,skillsInputValidation, CategoryInputValidation,changePasswordValidation, SocialLoginValidation,beneficiaryValidation,walletInputValidation,saveTokenValidation,registerValidation,loginValidation,otpValidation,ResendOtpValidation,passwordResetValidation
+changePasswordValidation,InputValidation, SocialLoginValidation,saveTokenValidation,registerValidation,loginValidation,otpValidation,ResendOtpValidation,passwordResetValidation
 };

@@ -18,11 +18,6 @@ router.get("/",(req,res)=>{
     });
 });
 
-// Create a new provider
-router.post("/addSkills",[authJwt.verifyToken,authJwt.isAdmin,verifyMiddleware.verifyskillsInput],
-  controller.CreateSkills
-);
-router.delete("/getSkills/:id",[authJwt.verifyToken,authJwt.isAdmin], controller.SkillDelete);
 
 // router.get(
 //   "admin",
