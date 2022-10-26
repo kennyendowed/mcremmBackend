@@ -19,7 +19,7 @@ router.get("/", controller.allAccess);
   router.get("/getCountry", controller.getCountry);
   router.get("/getCountryState/:id", controller.getCountryState);
 router.get("/getStateCity/:id/:state", controller.getStateCity);
-router.get("/getReport", controller.getReport);
+router.get("/getReport",[verifyMiddleware.VerifyActive,authJwt.verifyToken], controller.getReport);
 
 
 module.exports=router;

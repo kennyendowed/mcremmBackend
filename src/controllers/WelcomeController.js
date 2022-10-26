@@ -313,19 +313,15 @@ console.log(data)
 async function getReport(req,res){
   const {service , subService} = req.params;
   try{
-    organisationDetails.findAll({
-      where: {
-        subServiceCategory: sequelize.where(sequelize.fn('LOWER', sequelize.col('subServiceCategory')), 'LIKE', '%' + subService.toLowerCase() + '%'),
-                
-      },
+    surveyReport.findAll({
       attributes: {
         exclude: ["createdAt", "updatedAt", "is_deleted"],
       },
       include: [
         {
           model: User,       
-          as: "User_organisation_details",
-          attributes: ["companyName", "companydescription", "companydateFounded", "companyphoneNumber", "companycontactPersonFirstName","companyprofileImage","companycontactPersonLastName","companycacDocumentImage"],
+          as: "organisation_details",
+          attributes: ["companyName", "companydescription",  "companyphoneNumber", "companycontactPersonFirstName","companycontactPersonLastName"],
         },    
       ],
     }).then((data) => {
