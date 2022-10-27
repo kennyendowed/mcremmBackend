@@ -14,7 +14,7 @@ async function CreateSkills(req, res) {
         name: req.body.title
       }).then((datas) => {
         return res.status(200).send({
-          status: "1",
+          status:"TRUE",
           code: 200,
           data: "Skill was created",
           developerMessage: datas,
@@ -22,7 +22,7 @@ async function CreateSkills(req, res) {
       });
     } catch (error) {
       return res.status(500).send({
-        status: "0",
+        status:"FALSE",
         data: [
           {
             code: 500,
@@ -60,7 +60,7 @@ try{
 
   } catch (error) {
     return res.status(500).send({
-      status: "0",
+      status:"FALSE",
       data: [
         {
           code: 500,

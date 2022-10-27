@@ -9,7 +9,7 @@ try {
   
 } catch (error) {
   return res.status(500).send({
-    status: "0",
+    status:"FALSE",
     data: [
       {
         code: 500,

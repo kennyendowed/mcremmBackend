@@ -15,7 +15,7 @@ async function verifyToken(req, res, next) {
     !(req.cookies && req.cookies.__session);
     if (isTokenEmpty) {
       return res.status(403).send({
-         status: "0",
+         status:"FALSE",
         data: [
           {
             code: 403,
@@ -47,7 +47,7 @@ async function verifyToken(req, res, next) {
   await Blacklist_Token.findOne({ where: { token: token } }).then((found) => {
     if (found) {
       return res.status(401).send({
-         status: "0",
+         status:"FALSE",
         data: [
           {
             code: 401,
@@ -59,7 +59,7 @@ async function verifyToken(req, res, next) {
       jwt.verify(token, process.env.SECRET, (err, decoded) => {
         if (err) {
           return res.status(401).send({
-             status: "0",
+             status:"FALSE",
             data: [
               {
                 code: 401,
@@ -131,7 +131,7 @@ return;
   });
 } catch (error) {
   return res.status(500).send({
-    status: "0",
+    status:"FALSE",
     data: [
       {
         code: 500,
@@ -152,7 +152,7 @@ logotToken = (req, res, next) => {
     : req.headers["x-authorization"];
   if (!token) {
     return res.status(403).send({
-       status: "0",
+       status:"FALSE",
       data: [
         {
           code: 403,
@@ -165,7 +165,7 @@ logotToken = (req, res, next) => {
   Blacklist_Token.findOne({ where: { token: token } }).then((found) => {
     if (found) {
       return res.status(401).send({
-         status: "0",
+         status:"FALSE",
         data: [
           {
             code: 401,
@@ -179,7 +179,7 @@ logotToken = (req, res, next) => {
         //  console.log(decoded)
         if (err) {
           return res.status(403).send({
-             status: "0",
+             status:"FALSE",
             data: [
               {
                 code: 403,
@@ -204,7 +204,7 @@ logotToken = (req, res, next) => {
               token: token,
             });
             return res.status(200).send({
-               status: "1",
+               status:"TRUE",
               data: [
                 {
                   code: 200,
@@ -281,7 +281,7 @@ isStaffOrAdmin = (req, res, next) => {
 
      
       return res.status(403).send({
-         status: "0",
+         status:"FALSE",
         data: [
           {
             code: 403,
@@ -307,7 +307,7 @@ isCustomer = (req, res, next) => {
 
      
       return res.status(403).send({
-         status: "0",
+         status:"FALSE",
         data: [
           {
             code: 403,
@@ -333,7 +333,7 @@ isProvider = (req, res, next) => {
 
       
       return res.status(403).send({
-         status: "0",
+         status:"FALSE",
         data: [
           {
             code: 403,
@@ -371,7 +371,7 @@ isglobal = (req, res, next) => {
       }
 
       return res.status(403).send({
-         status: "0",
+         status:"FALSE",
         data: [
           {
             code: 403,

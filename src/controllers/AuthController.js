@@ -29,7 +29,7 @@ async function verify(req, res) {
           email_time: utils.addMinutes(10)
         }, { where: {  email_code: req.body.code  } }).then((data) =>{
           return  res.status(200).send({
-            status: "1",
+            status:"TRUE",
            data: [
              {
                code: 200,
@@ -51,7 +51,7 @@ async function verify(req, res) {
           phone_time: utils.addMinutes(20)
         }, { where: {  phone_code: req.body.code  } });
       return  res.status(200).send({
-           status: "1",
+           status:"TRUE",
           data: [
             {
               code: 200,
@@ -64,7 +64,7 @@ async function verify(req, res) {
 
   } catch (err) {
     res.status(400).send({
-      status: "0",
+      status:"FALSE",
       data: [
         {
           code: 400,
@@ -136,7 +136,7 @@ async function signup(req, res) {
       sendVerificationEmail(token, values, res, title, Emessage);
     //  utils.sendsSMS(req.body.phone,Pmessage,title);
       return res.status(200).send({
-         status: "1",
+         status:"TRUE",
         data: [
           {
             code: 200,
@@ -148,7 +148,7 @@ async function signup(req, res) {
 
     }).catch((err) => {
       return res.status(400).send({
-        status: "0",
+        status:"FALSE",
         data: [
           {
             code: 400,
@@ -183,7 +183,7 @@ async function resetPassword(req, res) {
       ", \n\n You are receiving this email because you just changed your account  password .  \n\n If you did not request a password reset, \n\n  please try to reset your password again  and also change the password to your personal email.  ";
     sendVerificationEmail(token, values, values, title, message);
    return  res.status(200).send({
-       status: "1",
+       status:"TRUE",
       data: [
         {
           code: 200,
@@ -217,7 +217,7 @@ async function signin(req, res) {
     console.log(user)
       if (!user) {
         return res.status(404).send({
-          status: "0",
+          status:"FALSE",
           data: [
             {
               code: 404,
@@ -238,7 +238,7 @@ async function signin(req, res) {
       );
       if (!passwordIsValid) {
         return res.status(401).send({
-          status: "0",
+          status:"FALSE",
           data: [
             {
               code: 401,
@@ -324,7 +324,7 @@ async function signin(req, res) {
       LogActivity("TRUE", 200, arrayDataLog, user.id, datedata);
    
       return  res.status(200).send({
-          status: "1",
+          status:"TRUE",
           data: [
             {
               id: user.id,
@@ -358,7 +358,7 @@ async function signin(req, res) {
       LogActivity("FALSE", 400, arrayDataLog, req.body.email, datedata);
     
     return  res.status(400).send({
-        status: "0",
+        status:"FALSE",
         data: [
           {
             code: 400,
@@ -648,7 +648,7 @@ async function socialSignin(req, res) {
     });
   } catch (error) {
     return res.status(500).send({
-      status: "0",
+      status:"FALSE",
       data: [
         {
           code: 500,
@@ -673,7 +673,7 @@ async function saveToken(req, res) {
         device_token: req.body.DeviceToken,
       });
       return res.status(200).send({
-         status: "1",
+         status:"TRUE",
         data: [
           {
             code: 200,
@@ -684,7 +684,7 @@ async function saveToken(req, res) {
     });
   } catch (error) {
     return res.status(500).send({
-      status: "0",
+      status:"FALSE",
       data: [
         {
           code: 500,
@@ -702,7 +702,7 @@ async function tokenDetails(req, res) {
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).send({
-        status: "0",
+        status:"FALSE",
         data: [
           {
             code: 401,
@@ -718,7 +718,7 @@ async function tokenDetails(req, res) {
     });
 
  return   res.status(200).send({
-       status: "1",
+       status:"TRUE",
       data: {
         code: 200,
         data: {
@@ -750,7 +750,7 @@ async function resendEmail(req, res) {
   }).then(async (user) => {
     if (!user) {
       return res.status(404).send({
-        status: "0",
+        status:"FALSE",
         data: [
           {
             code: 404,
@@ -801,7 +801,7 @@ async function resendEmail(req, res) {
  
 
     return res.status(200).send({
-       status: "1",
+       status:"TRUE",
       data: [
         {
           code: 200,
@@ -826,7 +826,7 @@ async function resetPassowrdLink(req, res) {
   }).then((user) => {
     if (!user) {
       return res.status(404).send({
-        status: "0",
+        status:"FALSE",
         data: [
           {
             code: 404,
@@ -875,7 +875,7 @@ async function resetPassowrdLink(req, res) {
     //  utils.sendsSMS(req.body.emailOrPhone,message,title);
     }
     return res.status(200).send({
-       status: "1",
+       status:"TRUE",
       data: [
         {
           code: 200,
@@ -926,7 +926,7 @@ async function sendVerificationEmail(token, req, res, title, message) {
     LogActivity("FALSE", 400, arrayDataLog, RefferuserID.id, datedata);
 
     return res.status(500).send({
-      status: "0",
+      status:"FALSE",
       data: [
         {
           code: 500,
@@ -983,7 +983,7 @@ try {
         });
       }
     return res.status(200).send({
-      status: "1",
+      status:"TRUE",
       code: 200,
       data: "Account updated successfully ",
     });
@@ -1023,7 +1023,7 @@ try {
         });
       }
     return res.status(200).send({
-      status: "1",
+      status:"TRUE",
       code: 200,
       data: "Account updated successfully ",
     });
@@ -1034,7 +1034,7 @@ try {
 
 } catch (error) {
   return res.status(500).send({
-    status: "0",
+    status:"FALSE",
     data: [
       {
         code: 500,
@@ -1073,14 +1073,14 @@ async function getProfileDetails(req, res) {
       ],
     }).then((data) => {
         return res.status(200).send({
-        status: "1",
+        status:"TRUE",
         code: 200,
         data: data
       });
     });
   } catch (error) {
     return res.status(500).send({
-      status: "0",
+      status:"FALSE",
       data: [
         {
           code: 500,

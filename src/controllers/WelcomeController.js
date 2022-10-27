@@ -21,7 +21,7 @@ const fs = require("fs");
 
 async function allAccess(req, res) {
   res.status(200).json({
-    status: "1",
+    status:"TRUE",
     data: [
       {
         code: 200,
@@ -57,7 +57,7 @@ async function encrypt(req, res) {
   console.log("Encrypted message: " + encryptedData);
 
   res.status(200).json({
-    status: "1",
+    status:"TRUE",
     data: [
       {
         code: 200,
@@ -79,7 +79,7 @@ async function dencrypt(req, res) {
 
   console.log("Decrypted message: " + decryptedData);
   res.status(200).json({
-    status: "1",
+    status:"TRUE",
     data: [
       {
         code: 200,
@@ -92,7 +92,7 @@ async function dencrypt(req, res) {
 async function getCountry(req, res) {
   try {
     return res.status(200).send({
-      status: "1",
+      status:"TRUE",
       code: 200,
       data: Country.getAllCountries(),
     });
@@ -115,7 +115,7 @@ async function getCountryState(req, res) {
   console.log(isoCode);
   try {
     return res.status(200).send({
-      status: "1",
+      status:"TRUE",
       code: 200,
       data: State.getStatesOfCountry(isoCode),
     });
@@ -139,7 +139,7 @@ async function getStateCity(req, res) {
   console.log(stateCode);
   try {
     return res.status(200).send({
-      status: "1",
+      status:"TRUE",
       code: 200,
       data: City.getCitiesOfState(countryCode, stateCode),
     });
@@ -202,7 +202,7 @@ console.log(data)
     }).then((data)=>{
 
       return res.status(200).send({
-        status: "1",
+        status:"TRUE",
         message: "Report saved successfully ",
        data: [
          {
@@ -262,7 +262,7 @@ console.log(data)
       }).then((data)=>{
 
         return res.status(200).send({
-          status: "1",
+          status:"TRUE",
           message: "Report saved successfully ",
          data: [
            {
@@ -276,7 +276,7 @@ console.log(data)
       });
     }).catch((error)=>{
       return res.status(500).send({
-        status: "0",
+        status:"FALSE",
         data: [
           {
             code: 500,
@@ -295,7 +295,7 @@ console.log(data)
 
 } catch (error) {
   return res.status(500).send({
-    status: "0",
+    status:"FALSE",
     data: [
       {
         code: 500,
@@ -327,7 +327,7 @@ async function getReport(req,res){
     }).then((data) => {
       if(data ==""){
         return   res.status(404).send({
-          status: "0",
+          status:"FALSE",
           data: [
             {
               code: 404,
@@ -337,7 +337,7 @@ async function getReport(req,res){
         });
       }else{
       return   res.status(200).send({
-        status: "1",
+        status:"TRUE",
         data: [
           {
             code: 200,
@@ -353,7 +353,7 @@ async function getReport(req,res){
   
 } catch (error) {
   return res.status(500).send({
-    status: "0",
+    status:"FALSE",
     data: [
       {
         code: 500,

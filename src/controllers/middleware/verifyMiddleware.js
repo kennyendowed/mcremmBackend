@@ -36,7 +36,7 @@ VverifyEmail = (req, res, next) => {
 
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -52,7 +52,7 @@ VverifyEmail = (req, res, next) => {
   }).then((response) => {
     if (!response) {
       res.status(404).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 404,
@@ -73,7 +73,7 @@ VverifyEmail = (req, res, next) => {
       const fii = d.split(" ")[0];
       if (fii == fi && myTIME > datetimedata) {
         res.status(404).send({
-           status: "0",
+           status: "FALSE",
           data: [
             {
               code: 404,
@@ -93,7 +93,7 @@ VverifyEmail = (req, res, next) => {
   
       if (myTIME > datetimedata) {
       return  res.status(422).send({
-           status: "0",
+           status: "FALSE",
           data: [
             {
               code: 422,
@@ -115,7 +115,7 @@ VerifypasswordReset = (req, res, next) => {
   const { error } = passwordResetValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -130,7 +130,7 @@ VerifypasswordReset = (req, res, next) => {
   }).then((response) => {
     if (!response) {
       res.status(404).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 404,
@@ -148,7 +148,7 @@ VerifysaveToken = (req, res, next) => {
   const { error } = saveTokenValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -164,7 +164,7 @@ verifySocialLogin = (req, res, next) => {
   const { error } = SocialLoginValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -180,7 +180,7 @@ verifyRegister = (req, res, next) => {
   const { error } = registerValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -196,7 +196,7 @@ verifyLogin = (req, res, next) => {
   const { error } = loginValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -216,7 +216,7 @@ verifyResendOtp = (req, res, next) => {
   const { error } = ResendOtpValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -232,7 +232,7 @@ verifyResendOtp = (req, res, next) => {
   }).then((response) => {
     if (!response) {
       res.status(404).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 404,
@@ -249,7 +249,7 @@ verifyResendOtp = (req, res, next) => {
 
     if (myTIME > datetimedata) {
       return  res.status(422).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 422,
@@ -269,7 +269,7 @@ verifyResendOtp = (req, res, next) => {
 
     if (myTIME > datetimedata) {
     return  res.status(422).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 422,
@@ -289,7 +289,7 @@ checkOtp = async (req, res, next) => {
   const { error } = otpValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -300,7 +300,7 @@ checkOtp = async (req, res, next) => {
     const verifyCode= await User.findOne({ where: {  [Op.or]: [{ email_code: req.body.code  }, { phone_code: req.body.code  }]  }});
      if (!verifyCode) {
       res.status(404).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 404,
@@ -313,7 +313,7 @@ checkOtp = async (req, res, next) => {
 
     if (verifyCode.email_code == req.body.code && Date.parse(verifyCode.email_time) < Date.parse(datetimedata)) {
         return  res.status(404).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 404,
@@ -328,7 +328,7 @@ checkOtp = async (req, res, next) => {
     if (verifyCode.phone_time < datetimedata) {
    
    return   res.status(404).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 404,
@@ -357,7 +357,7 @@ async function VerifyLoginActive(req, res, next){
     }).then((user) => {
       if (user) {
         res.status(400).send({
-           status: "0",
+           status: "FALSE",
           data: [
             {
               code: 400,
@@ -383,10 +383,7 @@ async function VerifyActive(req, res, next){
     !req.headers.authorization.startsWith('Bearer ')) &&
   !(req.cookies && req.cookies.__session);
 
- if(isTokenEmpty){
-  token = ' ';
-}
-  else if (req.headers.authorization.startsWith('Bearer ')) {
+ if (req.headers.authorization.startsWith('Bearer ')) {
     // Read the ID Token from the Authorization header.
     token = req.headers.authorization.split('Bearer ')[1];
   } else if (req.cookies) {
@@ -397,15 +394,18 @@ async function VerifyActive(req, res, next){
     token = req.headers.authorization;
   }
 
-  else {
+  else if(req.headers["x-authorization"]){
     token=req.headers["x-authorization"];
+  }
+  else{
+    token= ' ';
   }
 
   if(token != ' '){
   jwt.verify(token, process.env.SECRET,async (err, decoded) => {
     if (err) {
       return res.status(401).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 401,
@@ -423,7 +423,7 @@ async function VerifyActive(req, res, next){
 
     if (verifyPhone) {
       return res.status(400).send({
-          status: "0",
+          status: "FALSE",
          data: [
            {
              code: 400,
@@ -434,7 +434,7 @@ async function VerifyActive(req, res, next){
      }
      else if(verifyEmail){
        return res.status(400).send({
-          status: "0",
+          status: "FALSE",
          data: [
            {
              code: 400,
@@ -453,7 +453,7 @@ async function VerifyActive(req, res, next){
     }).then((user) => {
       if (user) {
         res.status(400).send({
-           status: "0",
+           status: "FALSE",
           data: [
             {
               code: 400,
@@ -473,7 +473,7 @@ async function VerifyActive(req, res, next){
   }
   else if(token === ' '){
     return res.status(401).send({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 401,
@@ -491,7 +491,7 @@ async function VerifyActive(req, res, next){
     }).then((user) => {
       if (user) {
         res.status(400).send({
-           status: "0",
+           status: "FALSE",
           data: [
             {
               code: 400,
@@ -516,7 +516,7 @@ async function checkDuplicateUsernameOrEmail  (req, res, next) {
   const { error } = registerValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -528,7 +528,7 @@ async function checkDuplicateUsernameOrEmail  (req, res, next) {
 
     if (userphoneexists) {
      return res.status(400).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 400,
@@ -539,7 +539,7 @@ async function checkDuplicateUsernameOrEmail  (req, res, next) {
     }
     else if(useremailexists){
       return res.status(400).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 400,
@@ -557,7 +557,7 @@ checkRolesExisted = (req, res, next) => {
     for (let i = 0; i < req.body.roles.length; i++) {
       if (!ROLES.includes(req.body.roles[i])) {
         res.status(400).send({
-           status: "0",
+           status: "FALSE",
           data: [
             {
               code: 400,
@@ -576,7 +576,7 @@ verifyInput = (req, res, next) => {
   const { error } = InputValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -596,7 +596,7 @@ async function ChangePassword(req, res, next) {
   const { error } = changePasswordValidation(req.body);
   if (error)
     return res.status(400).json({
-       status: "0",
+       status: "FALSE",
       data: [
         {
           code: 400,
@@ -618,7 +618,7 @@ async function ChangePassword(req, res, next) {
       );
       if (!passwordIsValid) {
         res.status(400).send({
-           status: "0",
+           status: "FALSE",
           data: [
             {
               code: 400,
@@ -630,7 +630,7 @@ async function ChangePassword(req, res, next) {
       }
     } else {
       res.status(400).send({
-         status: "0",
+         status: "FALSE",
         data: [
           {
             code: 404,
