@@ -133,7 +133,10 @@ const InputValidation =(data)=>{
       'any.required': 'reference number is required',
       'string.empty': 'reference number  is can not be empty',
     }),
-    sN: Joi.string().required(),
+    serial: Joi.string().required().messages({
+      'any.required': 'serial number is required',
+      'string.empty': 'serial number  is can not be empty',
+    }),
     modeType: Joi.string().required().messages({
       'any.required': 'model / type is required',
       'string.empty': 'model / type is can not be empty',

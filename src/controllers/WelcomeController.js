@@ -164,7 +164,7 @@ async function getStateCity(req, res) {
 
 async function saveReport(req, res) {
   const {userId ,fullname,id,email,rolesss}=await req.currentUser;
-  const {companyName ,equipment,modeType,avater,manufacturedYear,inspDate,nextInspDate,fleetNO,weight,manufacturer,capacity,location, sN,ref} = req.body;
+  const {companyName ,equipment,modeType,avater,manufacturedYear,inspDate,nextInspDate,fleetNO,weight,manufacturer,capacity,location, serial,ref} = req.body;
   let avatar = req.files.avater;
   console.log(avatar.data)
    var imageAsBase64 =avatar.data;// fs.readFileSync(avatar.name);//reading file as binary data
@@ -187,7 +187,7 @@ console.log(data)
       ref:ref,
       companyName: companyName,
       equipment:equipment,
-      sN:sN,
+      sN:serial,
       modeType:modeType,
       fleetNO:fleetNO,
       manufacturer:manufacturer,
