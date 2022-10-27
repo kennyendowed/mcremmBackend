@@ -11,7 +11,7 @@ const app=express();
 dotenv.config();
 
 var corsOptions = {
-    origin: true,
+    origin:  '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true
   // exposedHeaders: ['Authorization']
