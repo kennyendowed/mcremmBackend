@@ -166,10 +166,9 @@ async function saveReport(req, res) {
   const {userId ,fullname,id,email,rolesss}=await req.currentUser;
   const {companyName ,equipment,modeType,avater,manufacturedYear,inspDate,nextInspDate,fleetNO,weight,manufacturer,capacity,location, serial,ref} = req.body;
   let avatar = req.files.avater;
-  console.log(avatar.data)
+
    var imageAsBase64 =avatar.data;// fs.readFileSync(avatar.name);//reading file as binary data
 
-   console.log(imageAsBase64)
       var base64String = new Buffer(imageAsBase64).toString("base64"); // convert to base64 string
   try{
   User.findOne({
@@ -247,7 +246,7 @@ console.log(data)
         user_id: data.user_id,
         ref:ref,
         equipment:equipment,
-        sN:sN,
+        sN:serial,
         modeType:modeType,
         fleetNO:fleetNO,
         manufacturer:manufacturer,

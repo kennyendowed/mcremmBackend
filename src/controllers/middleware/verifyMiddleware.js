@@ -378,21 +378,21 @@ async function VerifyLoginActive(req, res, next){
 
 async function VerifyActive(req, res, next){
    
-  const isTokenEmpty =
-  (!req.headers.authorization ||
-    !req.headers.authorization.startsWith('Bearer ')) &&
-  !(req.cookies && req.cookies.__session);
+  // const isTokenEmpty =
+  // (!req.headers.authorization ||
+  //   !req.headers.authorization.startsWith('Bearer ')) &&
+  // !(req.cookies && req.cookies.__session);
 
- if (req.headers.authorization.startsWith('Bearer ')) {
+ if(req.headers.authorization){
+  token = req.headers.authorization;
+}
+else if (req.headers.authorization.startsWith('Bearer ')) {
     // Read the ID Token from the Authorization header.
     token = req.headers.authorization.split('Bearer ')[1];
   } else if (req.cookies) {
     // Read the ID Token from cookie.
     token = req.cookies.__session;
   } 
-  else if(req.headers.authorization){
-    token = req.headers.authorization;
-  }
 
   else if(req.headers["x-authorization"]){
     token=req.headers["x-authorization"];
@@ -414,6 +414,7 @@ async function VerifyActive(req, res, next){
         ],
       });
     }
+    
     let UserEmail = decoded.email;
   var Useremail =(req.body.email) ? req.body.email : UserEmail;
   const verifyEmail= await User.findOne({ where: {  [Op.or]: [{ phone: Useremail }, { email: Useremail }],email_verify:"0" }});
