@@ -63,7 +63,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true,
     },
     avater: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT('long'),
       allowNull: true,
     }, 
     inspDate: {
