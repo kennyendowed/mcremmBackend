@@ -378,28 +378,31 @@ async function VerifyLoginActive(req, res, next){
 
 async function VerifyActive(req, res, next){
    
-  // const isTokenEmpty =
-  // (!req.headers.authorization ||
-  //   !req.headers.authorization.startsWith('Bearer ')) &&
-  // !(req.cookies && req.cookies.__session);
-
- if(req.headers.authorization){
-  token = req.headers.authorization;
+  const isTokenEmpty =  (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) &&  !(req.cookies && req.cookies.__session);
+  if (isTokenEmpty) {
+    return res.status(403).send({
+      status: "FALSE",
+      data: [
+        {
+          token:req.headers,
+          code: 403,
+          message: "❌ Unauthorized Access 👉️ No Token Provided! ❌",
+        },
+      ],
+    });
+  }
+if (
+  req.headers.authorization ||
+  req.headers.authorization.startsWith('Bearer ')
+) {
+  // Read the ID Token from the Authorization header.
+  token =  req.headers.authorization.split('Bearer ')[1];
+} else if (req.cookies) {
+  // Read the ID Token from cookie.
+  token = req.cookies.__session;
+} else {
+  token=req.headers["x-authorization"];
 }
-else if (req.headers.authorization.startsWith('Bearer ')) {
-    // Read the ID Token from the Authorization header.
-    token = req.headers.authorization.split('Bearer ')[1];
-  } else if (req.cookies) {
-    // Read the ID Token from cookie.
-    token = req.cookies.__session;
-  } 
-
-  else if(req.headers["x-authorization"]){
-    token=req.headers["x-authorization"];
-  }
-  else{
-    token= ' ';
-  }
 
   if(token != ' '){
   jwt.verify(token, process.env.SECRET,async (err, decoded) => {

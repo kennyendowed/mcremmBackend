@@ -12,15 +12,15 @@ router.use(function(req, res, next) {
   });
 
 router.get("/", controller.allAccess);
- //encrypt user data
- router.post("/encrypt", controller.encrypt);
- router.post("/AddReport", [verifyMiddleware.VerifyActive,authJwt.verifyToken,verifyMiddleware.verifyInput], controller.saveReport);
-  router.post("/dencrypt", controller.dencrypt);
-  router.get("/getCountry", controller.getCountry);
+router.get("/GetallCompany",[authJwt.verifyToken],controller.GetallCompany);
+   router.get("/getCountry", controller.getCountry);
   router.get("/getCountryState/:id", controller.getCountryState);
 router.get("/getStateCity/:id/:state", controller.getStateCity);
-router.get("/getReport",[verifyMiddleware.VerifyActive,authJwt.verifyToken], controller.getReport);
 
+router.post("/encrypt", controller.encrypt);
+ router.post("/getReport",[verifyMiddleware.VerifyActive,authJwt.verifyToken], controller.getReport);
+ router.post("/AddReport", [verifyMiddleware.VerifyActive,authJwt.verifyToken,verifyMiddleware.verifyInput], controller.saveReport);
+  router.post("/dencrypt", controller.dencrypt);
 
 module.exports=router;
 

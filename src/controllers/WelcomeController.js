@@ -238,7 +238,7 @@ console.log(data)
       phone_time: utils.addMinutes(20),
       phone_code: Ptoken,
       phone_verify:"1",
-      is_permission: "2",
+      is_permission: "3",
       password: bcrypt.hashSync(companyName+"@"+userID, 8),
       ip_address: ip,
     }).then((data)=>{
@@ -246,6 +246,7 @@ console.log(data)
         user_id: data.user_id,
         ref:ref,
         equipment:equipment,
+        companyName: companyName,
         sN:serial,
         modeType:modeType,
         fleetNO:fleetNO,
@@ -310,11 +311,21 @@ console.log(data)
 }
 
 async function getReport(req,res){
-  const {service , subService} = req.params;
+  const { customer,  from_date, to_date } = req.body;
+  var whereClause;
+  if (!customer && !from_date && !to_date) {
+    whereClause = {};
+  }
+   else {
+    whereClause = { companyName: customer };
+  }
+  console.log(whereClause)
   try{
     surveyReport.findAll({
+      where: whereClause,
+      order: [["createdAt", "DESC"]],
       attributes: {
-        exclude: ["createdAt", "updatedAt", "is_deleted"],
+        exclude: ["is_deleted"],
       },
       include: [
         {
@@ -337,13 +348,7 @@ async function getReport(req,res){
       }else{
       return   res.status(200).send({
         status:"TRUE",
-        data: [
-          {
-            code: 200,
-          data: data 
-          ,
-          },
-        ],
+        data: data,
       });
     }
   
@@ -367,11 +372,116 @@ async function getReport(req,res){
 
 
 
+async function GetAllStatusCount(req, res) {
+  var userDetail = await req.currentUser;
+  var ResultCollect = [];
+  try {
+    ResultCollect["Allcompany"] = await User.findAndCountAll({
+      where: {   is_permission: "3"},
+      distinct: true,
+      col: "companyName",
+    });
+
+    ResultCollect["AllDUEDate"] = await surveyReport.findAndCountAll({
+      where: { nextInspDate: userDetail.department, RequestStatus: "Decline" },
+      distinct: false,
+      col: "initiatorStaff_id",
+    });
+
+    ResultCollect["AllApprove"] = await ReassignmentRequest.findAndCountAll({
+      where: { RequestStatus: "Approve" },
+      distinct: false,
+      col: "initiatorStaff_id",
+    });
+    ResultCollect["AllDecline"] = await ReassignmentRequest.findAndCountAll({
+      where: { RequestStatus: "Decline" },
+      distinct: false,
+      col: "initiatorStaff_id",
+    });
+    ResultCollect["pendingRequest"] = await ReassignmentRequest.findAndCountAll(
+      {
+        where: {
+          initiatorStaff_id: userDetail.employeeID,
+          RequestStatus: "Pending",
+        },
+        distinct: true,
+        col: "initiatorStaff_id",
+      }
+    );
+    ResultCollect["FinconpendingRequest"] =
+      await ReassignmentRequest.findAndCountAll({
+        where: { RequestStatus: "Pending" },
+        distinct: false,
+        col: "initiatorStaff_id",
+      });
+    //  console.log(ResultCollect)
+    return res.status(200).send({
+      status: "TRUE",
+      code: 200,
+      data: {
+        AllHODDecline: ResultCollect.AllHODDecline,
+        AllHODApprove: ResultCollect.AllHODApprove,
+        Decline: ResultCollect.AllDecline,
+        Approve: ResultCollect.AllApprove,
+        HodPendingRequest: ResultCollect.pendingRequest,
+        FinconpendingRequest: ResultCollect.FinconpendingRequest,
+      },
+    });
+  } catch (error) {
+    return res.status(500).send({
+      status: "FALSE",
+      data: [
+        {
+          code: 500,
+          message: "❌ Whoops, looks like something went wrong ❌",
+          developerMessage: error.message,
+        },
+      ],
+    });
+  }
+}
+
+async function GetallCompany(req, res) {
+  try {
+    //where: {RequestStatus:"Pending"},attributes:['department'],
+    const Departmentresult = await User.findAll({  where: {   is_permission: "3"},
+      distinct: true,
+      attributes: ["companyName"],
+      group: ["companyName"],
+    });
+    if(!Departmentresult){
+      return res.status(404).send({
+        status: "FALSE",
+        code: 200,
+        data: NULL,
+      });
+    }
+    else{
+      return res.status(200).send({
+        status: "TRUE",
+        code: 200,
+        data: Departmentresult,
+      });
+    }
+  
+  } catch (error) {
+    return res.status(500).send({
+      status: "FALSE",
+      data: [
+        {
+          code: 500,
+          message: "❌ Whoops, looks like something went wrong ❌",
+          developerMessage: error.message,
+        },
+      ],
+    });
+  }
+}
 
 
 module.exports = {
-  allAccess,
-  encrypt,
+  allAccess,GetAllStatusCount,
+  encrypt,GetallCompany,
   dencrypt,saveReport,
   getCountry,getReport,
   getCountryState,
