@@ -515,7 +515,7 @@ async function DownloadReport(req, res){
       '--no-sandbox',
       '--disable-setuid-sandbox'
     ],
-    executablePath:"C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+  //  executablePath:"C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
   });
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
