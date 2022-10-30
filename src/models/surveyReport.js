@@ -55,7 +55,7 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true,
     },
       weight: {
-      type: Sequelize.JSON,
+        type: Sequelize.STRING,
       allowNull: true,
     },   
     manufacturedYear: {

@@ -209,6 +209,17 @@ console.log(data)
      });
 
 
+    }).catch((error)=>{
+      return res.status(500).send({
+        status:"FALSE",
+        data: [
+          {
+            code: 500,
+            message: "💩 Whoops, looks like something went wrong ❌",
+            developerMessage: error.message,
+          },
+        ],
+      });
     });
   }
   else{
@@ -252,7 +263,7 @@ console.log(data)
         capacity:capacity,
         weight:weight,
         manufacturedYear:manufacturedYear,
-        avater:base64String,
+        avater:"data:image/png;base64,"+base64String +"",
         inspDate:inspDate,
         nextInspDate:nextInspDate,
         author: fullname
@@ -270,6 +281,17 @@ console.log(data)
        });
 
 
+      }).catch((error)=>{
+        return res.status(500).send({
+          status:"FALSE",
+          data: [
+            {
+              code: 500,
+              message: "💩 Whoops, looks like something went wrong ❌",
+              developerMessage: error.message,
+            },
+          ],
+        });
       });
     }).catch((error)=>{
       return res.status(500).send({
@@ -496,7 +518,7 @@ async function DownloadReport(req, res){
       weight:record.weight,
       companyName:record.companyName,
       capacity:record.capacity,
-      avater:"data:image/png;base64,"+record.avater +"",
+      avater:record.avater,
       equipment:record.equipment,
       sN:record.sN,
       ref:record.ref,

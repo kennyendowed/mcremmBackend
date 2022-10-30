@@ -44,6 +44,11 @@
             #report-header {
                 margin: auto;
             }
+            .logo{
+             width: 130px;
+             height: auto;
+             float: right;
+            }
             @media screen and (max-width: 480px) {
                 /* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
                 .fluid,
@@ -101,7 +106,7 @@
                         <td style="padding: 10px 10px;">
                             <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
                                 <tr>
-                                    <td><img class="center-on-narrow size-medium wp-image-32 aligncenter" src="{{Applogo}}" alt="" width="300" height="295" /></td>
+                                    <td><img class="center-on-narrow size-medium wp-image-32 aligncenter" src="{{avater}}" alt="" width="300" height="295" /></td>
                                 </tr>
                             </table>
                         </td>
@@ -116,6 +121,7 @@
                             <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
                                 <tr>
                                     <td>
+                                        <img class="logo aligncenter" src="{{Applogo}}" alt=""  />
                                         <p style="text-align: center; font-weight: 200; font-family: 'Century Gothic', arial, sans-serif; font-size: 2em; padding: 0px; margin: 0px;">{{equipment}} Survey Report</p>
                                         <p style="text-align: center; font-family: 'Century Gothic', arial, sans-serif; font-size: 2em; color: #2ecc71; font-weight: 200; padding: 0px; margin: 0px;">{{companyName}}</p>
                                         <p style="text-align: center; font-family: 'Century Gothic', arial, sans-serif; font-size: 1em; color: #000; font-weight: 200; padding: 0px; margin: 0px;">{{inspDate}}</p>
