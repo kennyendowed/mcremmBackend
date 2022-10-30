@@ -1,52 +1,256 @@
+<!doctype html>
+<html lang="en-US">
 <html>
-   <style>
-
-      body{
-		font-size: 10pt;
-        background-color: white;
-      }
-	  
-
-        {
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-}
-</style>
-
-
-<!--http://10.10.1.40:8888/warehouse/logo/providusbank-logo-150.jpg-->
-   <body style="font-family: Garamond; color: #2F444E; font-size: 10pt; ">
-      <table cellspacing="10" cellpadding="0" border="0" width="900px">
-         <tr>
-            <td align="center"><img src="https://img.freepik.com/free-vector/branding-identity-corporate-vector-logo-m-design_460848-10168.jpg?w=740&t=st=1667104240~exp=1667104840~hmac=9352fad627e04ed67e6e91dfe2ef80922627521494719b05ef9ec5ecaacd2a81" /></td>
-         </tr>
-         <tr>
-            <td align="center" style="font-family: Garamond; color: #2F444E; font-size: 20px; font-weight: bold;">STATEMENT OF ACCOUNT</td>
-         </tr>
-         <tr>
-            <td>
-               <table cellspacing="5" cellpadding="0" border="0" width="100%">
-                  <tr style="vertical-align: top;">
-                     <td width="70%">
-                        <table cellspacing="1" cellpadding="2" border="0" width="100%">
-                           <tr style="vertical-align: top;">
-                              <td width="25%" bgcolor="#FDB913"><strong>CUST. NAME</strong></td>
-                              <td bgcolor="#D9DDDF">{{companyName}}</td>
-                           </tr>
-                           <tr style="vertical-align: top;">
-                              <td bgcolor="#FDB913"><strong>ADDRESS</strong></td>
-                              <td bgcolor="#D9DDDF">{{location}}</td>
-                           </tr>
-                     
-                        </table>
-                     </td>
-           
-				  </tr>
-               </table>
-            </td>
-         </tr>
+    <head>
+       <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title>Survery Email Report</title>
+    <meta name="description" content="Survery Email Report ">
+        <style type="text/css">
+            /* What it does: Remove spaces around the email design added by some email clients. */ /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+            html,
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                height: 100% !important;
+                width: 100% !important;
+            } /* What it does: Stops email clients resizing small text. */
+            * {
+                -ms-text-size-adjust: 100%;
+                -webkit-text-size-adjust: 100%;
+            } /* What it does: Forces Outlook.com to display emails full width. */
+            .ExternalClass {
+                width: 100%;
+            } /* What is does: Centers email on Android 4.4 */
+            div[style*="margin: 16px 0"] {
+                margin: 0 !important;
+            } /* What it does: Stops Outlook from adding extra spacing to tables. */
+            table,
+            td {
+                mso-table-lspace: 0pt !important;
+                mso-table-rspace: 0pt !important;
+            } /* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+            table {
+                border-spacing: 0 !important;
+                border-collapse: collapse !important;
+                table-layout: fixed !important;
+                margin: 0 auto !important;
+            }
+            table table table {
+                table-layout: auto;
+            }
+            .data-tbl {
+                border-top: 5px solid #000;
+            }
+            #report-header {
+                margin: auto;
+            }
+            @media screen and (max-width: 480px) {
+                /* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+                .fluid,
+                .fluid-centered {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: auto !important;
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                } /* And center justify these ones. */
+                .fluid-centered {
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                } /* What it does: Forces table cells into full-width rows. */
+                .stack-column,
+                .stack-column-center {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    direction: ltr !important;
+                } /* And center justify these ones. */
+                .stack-column-center {
+                    text-align: center !important;
+                } /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+                .center-on-narrow {
+                    text-align: center !important;
+                    display: block !important;
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    float: none !important;
+                }
+                table.center-on-narrow {
+                    display: inline-block !important;
+                }
+                .headertbl {
+                    height: auto;
+                }
+                #report-header {
+                    width: 100%;
+                    margin: 0;
+                    min-width: 400px;
+                }
+                .ga-data img {
+                    width: 100%;
+                    max-width: 400px;
+                }
+            }
+        </style>
+    </head>
+    <body width="100%" style="margin: 0;">
+        <div id="report-header" style="max-width: 680px;">
+            <div style="display: inline-block; max-width: 300px; margin: 0 -2px; min-width: 300px; vertical-align: top; width: 100%;" class="stack-column">
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                        <td style="padding: 10px 10px;">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+                                <tr>
+                                    <td><img class="center-on-narrow size-medium wp-image-32 aligncenter" src="{{Applogo}}" alt="" width="300" height="295" /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--[if mso]> </td> <td align="left" valign="top" width="330"> <![endif]-->
+            <div style="display: inline-block; max-width: 380px; margin: 0 -2px; min-width: 380px; vertical-align: top; width: 100%;" class="stack-column">
+                <table width="100%" height="300" class="headertbl">
+                    <tr>
+                        <td valign="middle" style="padding: 10px 10px;">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+                                <tr>
+                                    <td>
+                                        <p style="text-align: center; font-weight: 200; font-family: 'Century Gothic', arial, sans-serif; font-size: 2em; padding: 0px; margin: 0px;">{{equipment}} Survey Report</p>
+                                        <p style="text-align: center; font-family: 'Century Gothic', arial, sans-serif; font-size: 2em; color: #2ecc71; font-weight: 200; padding: 0px; margin: 0px;">{{companyName}}</p>
+                                        <p style="text-align: center; font-family: 'Century Gothic', arial, sans-serif; font-size: 1em; color: #000; font-weight: 200; padding: 0px; margin: 0px;">{{inspDate}}</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--REPORT HEADER : End -->
+  <table style="background-color: #f2f3f8; max-width:670px; margin:0 auto;" width="100%" border="0"
+                    align="center" cellpadding="0" cellspacing="0">
+              <tr>
+                                    <td>
+                                        <table cellpadding="0" cellspacing="0"
+                                            style="width: 100%; border: 1px solid #ededed">
+                                            <tbody>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)">
+                                                        CUSTOMER NAME:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                      {{companyName}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)">
+                                                       EQUIPMENT:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                       {{equipment}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)">
+                                                        SN/NO:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                       {{sN}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed;border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)">
+                                                        MODE/TYPE:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                          {{modeType}}</td>
+                                                </tr>
+                                                  <tr>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed;border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)">
+                                                       MANUFACTURER MARK:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                          {{manufacturer}}</td>
+                                                </tr>
+                                                  <tr>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed;border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)">
+                                                        LOCATION:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                         {{location}}</td>
+                                                </tr>
+                                                  <tr>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed;border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)">
+                                                        CAPACITY:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                           {{capacity}}</td>
+                                                </tr>
+                                                  <tr>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed;border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)">
+                                                       WEIGHT:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                       {{weight}}</td>
+                                                </tr>
+                                                  <tr>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed;border-right: 1px solid #ededed; width: 35%; font-weight:500; color:rgba(0,0,0,.64)">
+                                                        MANUFACTURED YEAR:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                        {{manufacturedYear}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 10px;  border-bottom: 1px solid #ededed; border-right: 1px solid #ededed; width: 35%;font-weight:500; color:rgba(0,0,0,.64)">
+                                                        INSP DATE:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                          {{inspDate}}</td>
+                                                </tr>
+                                                 <tr>
+                                                    <td
+                                                        style="padding: 10px;  border-bottom: 1px solid #ededed; border-right: 1px solid #ededed; width: 35%;font-weight:500; color:rgba(0,0,0,.64)">
+                                                       NEXT INSP DATE:</td>
+                                                    <td
+                                                        style="padding: 10px; border-bottom: 1px solid #ededed; color: #455056;">
+                                                         {{nextInspDate}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td
+                                                        style="padding: 10px; border-right: 1px solid #ededed; width: 35%;font-weight:500; color:rgba(0,0,0,.64)">
+                                                        INSPECTED BY:</td>
+                                                    <td style="padding: 10px; color: #455056;">{{author}}.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
       </table>
-	  
-   </body>
+
+            <!-- REPORT FOOTER : Begin ***PASTE THIS PART IN REPORT FOOTER***-->
+            <div id="report-footer" style="width: 100%; margin-top: 20px;">
+                <hr />
+                <p>Hello {{companyName}},</p>
+                <p>This is to certify that the above mentioned equipment was visually inspected and tested.</p>
+                <p>And found in good working condition at the time of inspection and certificate issued without prejudice.</p>
+                <p>We appreciate the opportunity to serve you and the confidence you have placed in us.</p>
+                
+                <p>&nbsp;</p>
+                <p>Kind Regards</p>
+                <p>Mcremm Engineering Service Limited</p>
+                <hr />
+                <p style="text-align: center;">Mcremm Engineering Service Limited • 31 Old Airport Premises Airport Road Warri, Delta State Nigeria </p>
+                 <p style="text-align: center;"><a >• 08077029692 || 08064526558</a></p>
+                <p style="text-align: center;"><a href="mailto:mcremmengineering1@gmail.com">• mcremmengineering1@gmail.com</a></p>
+            </div>
+        </div>
+    </body>
 </html>
+<!-- REPORT FOOTER : End -->

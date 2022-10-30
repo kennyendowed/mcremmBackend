@@ -1,0 +1,682 @@
+<!--REPORT HEADER : Begin ***PASTE THIS PART IN REPORT HEADER*** -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Untitled Document</title>
+        <style type="text/css">
+            /* What it does: Remove spaces around the email design added by some email clients. */ /* Beware: It can remove the padding / margin and add a background color to the compose a reply window. */
+            html,
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                height: 100% !important;
+                width: 100% !important;
+            } /* What it does: Stops email clients resizing small text. */
+            * {
+                -ms-text-size-adjust: 100%;
+                -webkit-text-size-adjust: 100%;
+            } /* What it does: Forces Outlook.com to display emails full width. */
+            .ExternalClass {
+                width: 100%;
+            } /* What is does: Centers email on Android 4.4 */
+            div[style*="margin: 16px 0"] {
+                margin: 0 !important;
+            } /* What it does: Stops Outlook from adding extra spacing to tables. */
+            table,
+            td {
+                mso-table-lspace: 0pt !important;
+                mso-table-rspace: 0pt !important;
+            } /* What it does: Fixes webkit padding issue. Fix for Yahoo mail table alignment bug. Applies table-layout to the first 2 tables then removes for anything nested deeper. */
+            table {
+                border-spacing: 0 !important;
+                border-collapse: collapse !important;
+                table-layout: fixed !important;
+                margin: 0 auto !important;
+            }
+            table table table {
+                table-layout: auto;
+            }
+            .data-tbl {
+                border-top: 5px solid #000;
+            }
+            #report-header {
+                margin: auto;
+            }
+            @media screen and (max-width: 480px) {
+                /* What it does: Forces elements to resize to the full width of their container. Useful for resizing images beyond their max-width. */
+                .fluid,
+                .fluid-centered {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: auto !important;
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                } /* And center justify these ones. */
+                .fluid-centered {
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                } /* What it does: Forces table cells into full-width rows. */
+                .stack-column,
+                .stack-column-center {
+                    display: block !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    direction: ltr !important;
+                } /* And center justify these ones. */
+                .stack-column-center {
+                    text-align: center !important;
+                } /* What it does: Generic utility class for centering. Useful for images, buttons, and nested tables. */
+                .center-on-narrow {
+                    text-align: center !important;
+                    display: block !important;
+                    margin-left: auto !important;
+                    margin-right: auto !important;
+                    float: none !important;
+                }
+                table.center-on-narrow {
+                    display: inline-block !important;
+                }
+                .headertbl {
+                    height: auto;
+                }
+                #report-header {
+                    width: 100%;
+                    margin: 0;
+                    min-width: 400px;
+                }
+                .ga-data img {
+                    width: 100%;
+                    max-width: 400px;
+                }
+            }
+        </style>
+    </head>
+    <body width="100%" style="margin: 0;">
+        <div id="report-header" style="max-width: 680px;">
+            <div style="display: inline-block; max-width: 300px; margin: 0 -2px; min-width: 300px; vertical-align: top; width: 100%;" class="stack-column">
+                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                        <td style="padding: 10px 10px;">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+                                <tr>
+                                    <td><img class="center-on-narrow size-medium wp-image-32 aligncenter" src="https://jupitermultimedia.com/mainwp-report-resources/images/header.png" alt="" width="300" height="295" /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--[if mso]> </td> <td align="left" valign="top" width="330"> <![endif]-->
+            <div style="display: inline-block; max-width: 380px; margin: 0 -2px; min-width: 380px; vertical-align: top; width: 100%;" class="stack-column">
+                <table width="100%" height="300" class="headertbl">
+                    <tr>
+                        <td valign="middle" style="padding: 10px 10px;">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+                                <tr>
+                                    <td>
+                                        <p style="text-align: center; font-weight: 200; font-family: 'Century Gothic', arial, sans-serif; font-size: 2em; padding: 0px; margin: 0px;">Website Care Report</p>
+                                        <p style="text-align: center; font-family: 'Century Gothic', arial, sans-serif; font-size: 2em; color: #2ecc71; font-weight: 200; padding: 0px; margin: 0px;">[client.site.name]</p>
+                                        <p style="text-align: center; font-family: 'Century Gothic', arial, sans-serif; font-size: 1em; color: #000; font-weight: 200; padding: 0px; margin: 0px;">[report.daterange]</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!--REPORT HEADER : End -->
+
+            <!-- Google Analytics : Begin ***PASTE THIS PART IN REPORT BODY***-->
+            <table cellspacing="0" cellpadding="0" border="0" width="100%" class="data-tbl">
+                <tr>
+                    <td style="padding: 10px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
+                        <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">Visitor Stats </span>
+                        <p style="text-align: center;" class="ga-data">
+                            [ga.visits.chart]<br />
+                            From <strong>[ga.startdate]</strong> to <strong>[ga.enddate]</strong>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width: 660px;">
+                <tr>
+                    <td align="center" valign="top" style="font-size: 0;">
+                        <!--[if mso]> <table border="0" cellspacing="0" cellpadding="0" align="center" width="660"> <tr> <td align="left" valign="top" width="220"> <![endif]-->
+                        <div style="display: inline-block !important; margin: 0 -2px; max-width: 33.33%; min-width: 100px; vertical-align: top; width: 100%;" class="">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+                                            <tr>
+                                                <td
+                                                    align="center"
+                                                    valign="middle"
+                                                    class="stack-column-center"
+                                                    style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;"
+                                                >
+                                                    <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">[ga.visits]</span><br />
+                                                    Site Visitors
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> <td align="left" valign="top" width="220"> <![endif]-->
+                        <div style="display: inline-block !important; margin: 0 -2px; max-width: 33.33%; min-width: 100px; vertical-align: top; width: 100%;" class="">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+                                            <tr>
+                                                <td
+                                                    align="center"
+                                                    valign="middle"
+                                                    class="stack-column-center"
+                                                    style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;"
+                                                >
+                                                    <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">[ga.new.visits]</span><br />
+                                                    New Visitors
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> <td align="left" valign="top" width="220"> <![endif]-->
+                        <div style="display: inline-block !important; margin: 0 -2px; max-width: 33.33%; min-width: 100px; vertical-align: top; width: 100%;" class="">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+                                            <tr>
+                                                <td
+                                                    align="center"
+                                                    valign="middle"
+                                                    class="stack-column-center"
+                                                    style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;"
+                                                >
+                                                    <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">[ga.pageviews]</span><br />
+                                                    Page Views
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> </tr> </table> <![endif]-->
+                    </td>
+                </tr>
+            </table>
+            <!-- Google Analytics : End -->
+            <!-- 2X2 Grid : Begin -->
+            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td style="padding: 10px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;" class="data-tbl">
+                        <p><span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">Security & Performance</span></p>
+                        We continually maintain backups and update security to ensure your site is secure and running well. We strive to maintain 99% uptime or better.
+                        <p></p>
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width: 660px;">
+                <tr>
+                    <td align="center" valign="top" style="font-size: 0; padding: 10px;">
+                        <!--[if mso]> <table border="0" cellspacing="0" cellpadding="0" align="center" width="660"> <tr> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table
+                                            cellspacing="0"
+                                            cellpadding="0"
+                                            border="0"
+                                            width="100%"
+                                            style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px; min-height: 300px;"
+                                        >
+                                            <tr>
+                                                <td
+                                                    valign="top"
+                                                    class="stack-column data-tbl"
+                                                    style="
+                                                        font-family: sans-serif;
+                                                        font-size: 15px;
+                                                        mso-height-rule: exactly;
+                                                        line-height: 20px;
+                                                        color: #555555;
+                                                        padding-top: 10px;
+                                                        background: url(https://jupitermultimedia.com/mainwp-report-resources/images/backupbg.png) top center no-repeat;
+                                                        background-size: 300px 296px;
+                                                        min-height: 300px;
+                                                    "
+                                                >
+                                                    <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">Backups</span>
+                                                    <p>We've created<strong> [backup.created.count]</strong> backup(s) of your website during this period and safely stored them away giving you peace of mind!</p>
+                                                    <p>[section.backups.created] [backup.created.type] on [backup.created.date] [/section.backups.created]</p>
+                                                    <p>Please be aware we also run daily, weekly and monthly backups of the entire server as well. Minimally we retain a backup daily for a week. Two weekly backups and One Mnthly backup.</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table
+                                            cellspacing="0"
+                                            cellpadding="0"
+                                            border="0"
+                                            width="100%"
+                                            style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px; min-height: 250px;"
+                                        >
+                                            <tr>
+                                                <td
+                                                    valign="top"
+                                                    class="stack-column data-tbl"
+                                                    style="
+                                                        font-family: sans-serif;
+                                                        font-size: 15px;
+                                                        mso-height-rule: exactly;
+                                                        line-height: 20px;
+                                                        color: #555555;
+                                                        padding-top: 10px;
+                                                        background: url(https://jupitermultimedia.com/mainwp-report-resources/images/securitybg.png) top center no-repeat;
+                                                        background-size: 290px 298px;
+                                                        min-height: 250px;
+                                                    "
+                                                >
+                                                    <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">Security</span>
+                                                    <p>We've scanned your website <strong>[sucuri.checks.count]</strong> time(s) to check for malicious software or malware ensuring your site is secure.</p>
+                                                    <p>[section.sucuri.checks]Status: [sucuri.check.status] | Webtrust: [sucuri.check.webtrust] on [sucuri.check.date] [/section.sucuri.checks]</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> </tr> </table> <![endif]-->
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width: 660px;">
+                <tr>
+                    <td align="center" valign="top" style="font-size: 0; padding: 10px;">
+                        <!--[if mso]> <table border="0" cellspacing="0" cellpadding="0" align="center" width="660"> <tr> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                            <tr>
+                                                <td
+                                                    valign="top"
+                                                    class="stack-column data-tbl"
+                                                    style="
+                                                        font-family: sans-serif;
+                                                        font-size: 15px;
+                                                        mso-height-rule: exactly;
+                                                        line-height: 20px;
+                                                        color: #555555;
+                                                        padding-top: 10px;
+                                                        background: url(https://jupitermultimedia.com/mainwp-report-resources/images/upbg.png) top center no-repeat;
+                                                        background-size: 300px 228px;
+                                                        min-height: 250px;
+                                                    "
+                                                >
+                                                    <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">Uptime</span>
+                                                    <p>
+                                                        We check your website to make sure it is up and running every 5 minutes. It can be offline for a number of reasons such as when we update and test it or sometimes there may be a delay
+                                                        on the server - We are notified of all downtime and investigate to put this right.
+                                                    </p>
+                                                    <div style="display: inline-block !important; margin: 0 -2px; max-width: 50%; min-width: 100px; vertical-align: top; width: 100%;" class="">
+                                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                            <tr>
+                                                                <td style="padding: 10px 10px;">
+                                                                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+                                                                        <tr>
+                                                                            <td
+                                                                                align="center"
+                                                                                valign="middle"
+                                                                                class="stack-column-center"
+                                                                                style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;"
+                                                                            >
+                                                                                <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">[aum.alltimeuptimeratio]</span><br />
+                                                                                Overall Uptime
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div style="display: inline-block !important; margin: 0 -2px; max-width: 50%; min-width: 100px; vertical-align: top; width: 100%;" class="">
+                                                        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                                            <tr>
+                                                                <td style="padding: 10px 10px;">
+                                                                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-size: 14px; text-align: left;">
+                                                                        <tr>
+                                                                            <td
+                                                                                align="center"
+                                                                                valign="middle"
+                                                                                class="stack-column-center"
+                                                                                style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;"
+                                                                            >
+                                                                                <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">[aum.uptime30]</span><br />
+                                                                                Last 30 Days
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <table width="100%" border="0" cellspacing="5" style="display: none; box-sizing: border-box;">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="50%" align="center">
+                                                                    <span style="font-size: 200%; width: 100px; display: inline-block; font-weight: bold;">[aum.alltimeuptimeratio]</span>
+                                                                    <span style="font-size: 100%;">
+                                                                        <br />
+                                                                        <span style="font-weight: normal;">Overall Uptime</span>
+                                                                    </span>
+                                                                </td>
+                                                                <td width="50%" align="center">
+                                                                    <span style="font-size: 200%; width: 100px; display: inline-block; font-weight: bold;">[aum.uptime30]</span>
+                                                                    <span style="font-size: 100%;">
+                                                                        <br />
+                                                                        <span style="font-weight: normal;">Last 30 Days</span>
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table
+                                            cellspacing="0"
+                                            cellpadding="0"
+                                            border="0"
+                                            width="100%"
+                                            style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px; min-height: 200px;"
+                                        >
+                                            <tr>
+                                                <td
+                                                    valign="top"
+                                                    class="stack-column data-tbl"
+                                                    style="
+                                                        font-family: sans-serif;
+                                                        font-size: 15px;
+                                                        mso-height-rule: exactly;
+                                                        line-height: 20px;
+                                                        color: #555555;
+                                                        padding-top: 10px;
+                                                        background: url(https://jupitermultimedia.com/mainwp-report-resources/images/speedbg.png) top center no-repeat;
+                                                        background-size: 300px 175px;
+                                                        min-height: 200px;
+                                                    "
+                                                >
+                                                    <span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">Page Speed</span>
+                                                    <p style="box-sizing: border-box; text-align: center; font-size: 66px;"><strong>[pagespeed.average.desktop]</strong></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> </tr> </table> <![endif]-->
+                    </td>
+                </tr>
+            </table>
+            <!-- 2X2 Grid : End -->
+            <!-- UPDATES 2X2 Grid : Begin -->
+            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td valign="top" class="data-tbl" style="padding: 10px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
+                        <p><span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">Updates</span></p>
+                        <p>We've updated <strong>[plugin.updated.count]</strong> plugin(s) and <strong>[theme.updated.count]</strong> theme(s) ensuring your website is up to date and secure.</p>
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width: 660px;">
+                <tr>
+                    <td align="center" valign="top" style="font-size: 0; padding: 10px;">
+                        <!--[if mso]> <table border="0" cellspacing="0" cellpadding="0" align="center" width="660"> <tr> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                            <tr>
+                                                <td valign="top" class="stack-column data-tbl" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                                    <h3><span style="font-size: 100%; font-weight: bold;">WordPress Updates ([wordpress.updated.count])</span></h3>
+                                                    <p style="font-size: 85%; margin: 0.5em 0.5em 1em;">
+                                                        [section.wordpress.updated]WordPress • [wordpress.old.version] to [wordpress.current.version] on [wordpress.updated.date][/section.wordpress.updated]
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                            <tr>
+                                                <td valign="top" class="stack-column data-tbl" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                                    <h3><span style="font-size: 100%; font-weight: bold;">Theme Updates ([themes.updated.count])</span></h3>
+                                                    <p style="font-size: 85%; margin: 0.5em 0.5em 1em;">
+                                                        [section.themes.updated][theme.name] • [theme.old.version] to [theme.current.version] on [theme.updated.date][/section.themes.updated]
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> </tr> </table> <![endif]-->
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width: 660px;">
+                <tr>
+                    <td align="center" valign="top" style="font-size: 0; padding: 10px;">
+                        <!--[if mso]> <table border="0" cellspacing="0" cellpadding="0" align="center" width="660"> <tr> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                            <tr>
+                                                <td valign="top" class="stack-column data-tbl" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                                    <h3><span style="font-size: 100%; font-weight: bold;">Plugin Updates ([plugins.updated.count])</span></h3>
+                                                    <p style="font-size: 85%; margin: 0.5em 0.5em 1em;">
+                                                        [section.plugins.updated][plugin.name] • [plugin.old.version] to [plugin.current.version] on [plugin.updated.date][/section.plugins.updated]
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                            <tr>
+                                                <td valign="top" class="stack-column data-tbl" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                                    <h3><strong>Links</strong></h3>
+                                                    <p>
+                                                        <span style="box-sizing: border-box;"><strong>[brokenlinks.links.broken]</strong> Broken links</span>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> </tr> </table> <![endif]-->
+                    </td>
+                </tr>
+            </table>
+            <!-- UPDATES 2X2 Grid : End -->
+            <!-- CONTENT MANAGEMENT 2X2 Grid : Begin -->
+            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td valign="top" class="data-tbl" style="padding: 10px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
+                        <p><span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">Content Management</span></p>
+                        <p>Keeping your content up to date helps build trust with your customers. Customers rely on your site for useful information on whatever market you are in.</p>
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width: 660px;">
+                <tr>
+                    <td align="center" valign="top" style="font-size: 0; padding: 10px;">
+                        <!--[if mso]> <table border="0" cellspacing="0" cellpadding="0" align="center" width="660"> <tr> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td valign="top" style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                            <tr>
+                                                <td style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;" class="stack-column data-tbl">
+                                                    <h3><strong>Pages</strong></h3>
+                                                    <p><strong>[page.created.count]</strong> Pages Created</p>
+                                                    <p><strong>[page.updated.count]</strong> Pages Updates</p>
+                                                    <p><strong>[page.trashed.count]</strong> Pages Removed</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                            <tr>
+                                                <td valign="top" class="stack-column data-tbl" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                                    <h3><strong>Posts</strong></h3>
+                                                    <p><strong>[post.created.count]</strong> Posts Created</p>
+                                                    <p><strong>[post.updated.count]</strong> Posts Updates</p>
+                                                    <p><strong>[post.trashed.count]</strong> Posts Removed</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> </tr> </table> <![endif]-->
+                    </td>
+                </tr>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="max-width: 660px;">
+                <tr>
+                    <td align="center" valign="top" style="font-size: 0; padding: 10px;">
+                        <!--[if mso]> <table border="0" cellspacing="0" cellpadding="0" align="center" width="660"> <tr> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                            <tr>
+                                                <td valign="top" class="stack-column data-tbl" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                                    <h3><strong>Media</strong></h3>
+                                                    <p>
+                                                        <span style="box-sizing: border-box;"><strong>[media.uploaded.count]</strong> Media uploaded</span>
+                                                    </p>
+                                                    <p><strong>[media.updated.count]</strong> Media Updates</p>
+                                                    <p><strong>[media.deleted.count]</strong> Media Removed</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> <td align="left" valign="top" width="330"> <![endif]-->
+                        <div style="display: inline-block; max-width: 50%; margin: 0 -2px; min-width: 200px; vertical-align: top; width: 100%;" class="stack-column">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <td style="padding: 10px 10px;">
+                                        <table cellspacing="0" cellpadding="0" border="0" width="100%" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                            <tr>
+                                                <td valign="top" class="stack-column data-tbl" style="font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555; padding-top: 10px;">
+                                                    <h3><strong>Navigation</strong></h3>
+                                                    <p><strong>[menu.created.count]</strong> Nav Created</p>
+                                                    <p><strong>[menu.updated.count]</strong> Nav Updates</p>
+                                                    <p><strong>[menu.trashed.count]</strong> Nav Removed</p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--[if mso]> </td> </tr> </table> <![endif]-->
+                    </td>
+                </tr>
+            </table>
+            <!-- CONTENT MANAGEMENT 2X2 Grid : End -->
+            <!-- MAINTENANCE : Begin -->
+            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                <tr>
+                    <td valign="top" class="data-tbl" style="padding: 10px; font-family: sans-serif; font-size: 15px; mso-height-rule: exactly; line-height: 20px; color: #555555;">
+                        <p><span style="font-family: 'Century Gothic', arial, sans-serif; font-size: 24px; font-weight: bold;">Maintenance</span></p>
+                        <p>Maintenance has been performed <strong>[maintenance.process.count]</strong> time(s) to keep your site running optimally.</p>
+                        <p>[section.maintenance.process] [maintenance.process.date] - [maintenance.process.time]: [maintenance.process.result] ([maintenance.process.details]) [/section.maintenance.process]</p>
+                    </td>
+                </tr>
+            </table>
+            <!-- MAINTENANCE : End -->
+
+            <!-- REPORT FOOTER : Begin ***PASTE THIS PART IN REPORT FOOTER***-->
+            <div id="report-footer" style="width: 100%; margin-top: 20px;">
+                <hr />
+                <p>Hello [client.name],</p>
+                <p>Thank you for trusting your website with us! We hope you find this report useful.</p>
+                <p>We appreciate the opportunity to serve you and the confidence you have placed in us.</p>
+                <p>Please contact us if we can be of further assistance.</p>
+                <p>&nbsp;</p>
+                <p>Kind Regards</p>
+                <p>Jupiter Multimedia LLC</p>
+                <hr />
+                <p style="text-align: center;">Jupiter Multimedia LLC • 71 West 6th Street Bayonne NJ 07002 • info@jupitermultimedia.com</p>
+                <p style="text-align: center;"><a href="https://jupitermultimedia.com/unsubreports?clientemail=[client.email]">Unsubscribe from reports</a></p>
+            </div>
+        </div>
+    </body>
+</html>
+<!-- REPORT FOOTER : End -->

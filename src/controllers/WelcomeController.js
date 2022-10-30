@@ -492,6 +492,7 @@ async function DownloadReport(req, res){
       
   
      var data = {
+      Applogo:process.env.APP_BASEURL+"assets/log.png",
       weight:record.weight,
       companyName:record.companyName,
       capacity:record.capacity,
@@ -499,6 +500,7 @@ async function DownloadReport(req, res){
       equipment:record.equipment,
       sN:record.sN,
       ref:record.ref,
+      author:author,
       fleetNO:record.fleetNO,
       manufacturer:record.manufacturer,
       location:record.location,
