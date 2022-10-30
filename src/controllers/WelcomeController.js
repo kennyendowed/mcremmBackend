@@ -335,12 +335,8 @@ async function getReport(req,res){
       if(data ==""){
         return   res.status(404).send({
           status:"FALSE",
-          data: [
-            {
-              code: 404,
-            data: "💩 No active record ❌",
-            },
-          ],
+          code: 404,
+          message: "💩 No active record ❌",
         });
       }else{
       return   res.status(200).send({
