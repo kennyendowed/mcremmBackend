@@ -511,8 +511,11 @@ async function DownloadReport(req, res){
    const path = `statements/${data.companyName}${Date.now()}.pdf`;
    const content = await compile("StatementHTML", data);
   const browser = await puppeteer.launch({
-    executablePath:
-      "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+    'args' : [
+      '--no-sandbox',
+      '--disable-setuid-sandbox'
+    ],
+    executablePath:"C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
   });
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
