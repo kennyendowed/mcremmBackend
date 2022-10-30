@@ -507,8 +507,9 @@ async function DownloadReport(req, res){
     inspDate:moment(new Date(record.inspDate)).format('DD-MM-YYYY'),
     nextInspDate: moment(new Date(record.nextInspDate)).format("DD-MM-YYYY"),
   };
-  console.log(data)
-   const path = `statements/${data.companyName}${Date.now()}.pdf`;
+  // console.log(data)
+  // const path = `statements/${data.companyName}${Date.now()}.pdf`;
+  const path = `statements/report.pdf`;
    const content = await compile("StatementHTML", data);
   const browser = await puppeteer.launch({
     'args' : [
@@ -526,11 +527,14 @@ async function DownloadReport(req, res){
     format: "A4",
     printBackground: true,
   });
+  // var base64String = new Buffer(file).toString("base64"); 
+  // console.log(base64String)
   console.log("done...");
   return res.status(200).send({
     status: "TRUE",
     code: 200,
     data:  process.env.APP_ASSETS_URL+"/"+path
+  
   });
  });
 };
