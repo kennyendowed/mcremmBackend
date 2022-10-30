@@ -40,6 +40,7 @@ app.use(fileUpload({
   createParentPath: true
 }));
 app.use('/assets',express.static('assets'));
+app.use('/statements',express.static('statements'));
 app.use('/assets/uploads',express.static('assets/uploads'));
 app.use('/assets/images',express.static('assets/images'));
 

@@ -21,6 +21,7 @@ router.post("/encrypt", controller.encrypt);
  router.post("/getReport",[verifyMiddleware.VerifyActive,authJwt.verifyToken], controller.getReport);
  router.post("/AddReport", [verifyMiddleware.VerifyActive,authJwt.verifyToken,verifyMiddleware.verifyInput], controller.saveReport);
   router.post("/dencrypt", controller.dencrypt);
+  router.post("/Download",[verifyMiddleware.VerifyActive,authJwt.verifyToken], controller.DownloadReport);
 
 module.exports=router;
 

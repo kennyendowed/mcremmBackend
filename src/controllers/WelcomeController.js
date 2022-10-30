@@ -2,19 +2,16 @@ const db = require("../models");
 const utils = require("./helpers/utils");
 const crypto = require("crypto");
 const { City, State, Country } = require("akcountry-state-city");
-const { Console } = require("console");
-const algorithm = "aes-128-cbc";
-const Securitykey = "zAL7X5AVRm8l4Ifs";
-const initVector = "BE/s3V0HtpPsE+1x";
 const User = db.user;
 const surveyReport =db.surveyReport;
-const organisationDetails =db.organisationDetails;
 const Op = db.Sequelize.Op;
-const sequelize =db.Sequelize;
-const ServiceSkills = db.skills;
 var bcrypt = require("bcryptjs");
 const { resolve } = require("path");
 const fs = require("fs");
+const puppeteer = require('puppeteer');
+const hbs = require('handlebars');
+const path = require('path');
+const moment = require('moment');
 
 
 
@@ -194,7 +191,7 @@ console.log(data)
       capacity:capacity,
       weight:weight,
       manufacturedYear:manufacturedYear,
-      avater:base64String,
+      avater:"data:image/png;base64,"+base64String +"",
       inspDate:inspDate,
       nextInspDate:nextInspDate,
       author: fullname
@@ -478,12 +475,72 @@ async function GetallCompany(req, res) {
   }
 }
 
+const compile = async function (templateName, data) {
+  try {
+    const filePath = path.join(
+      process.cwd(),
+      './templates',
+      `${templateName}.hbs`
+    );
+    const html = fs.readFileSync(filePath, 'utf-8');
+    return hbs.compile(html)(data);
+  } catch (error) {
+    console.log(error);
+   // next(error);
+  }
+};
+async function DownloadReport(req, res){
+    const {id} = req.body;
+     const records= surveyReport.findOne({where: {id: id}}).then(async (record) => {
+       console.log(record)
+      
+  
+     var data = {
+      weight:record.weight,
+      companyName:record.companyName,
+      capacity:record.capacity,
+      avater:"data:image/png;base64,"+record.avater +"",
+      equipment:record.equipment,
+      sN:record.sN,
+      ref:record.ref,
+      fleetNO:record.fleetNO,
+      manufacturer:record.manufacturer,
+      location:record.location,
+      manufacturedYear:record.manufacturedYear,
+      modeType:record.modeType,
+    inspDate:moment(new Date(record.inspDate)).format('DD-MM-YYYY'),
+    nextInspDate: moment(new Date(record.nextInspDate)).format("DD-MM-YYYY"),
+  };
+  console.log(data)
+   const path = `statements/${data.companyName}${Date.now()}.pdf`;
+   const content = await compile("StatementHTML", data);
+  const browser = await puppeteer.launch({
+    executablePath:
+      "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+  });
+  const page = await browser.newPage();
+  await page.setDefaultNavigationTimeout(0);
+  await page.setContent(content);
+  await page.emulateMediaType("screen");
+  await page.pdf({
+    path: path,
+    format: "A4",
+    printBackground: true,
+  });
+  console.log("done...");
+  return res.status(200).send({
+    status: "TRUE",
+    code: 200,
+    data:  process.env.APP_ASSETS_URL+"/"+path
+  });
+ });
+};
 
 module.exports = {
   allAccess,GetAllStatusCount,
   encrypt,GetallCompany,
   dencrypt,saveReport,
   getCountry,getReport,
-  getCountryState,
+  getCountryState,DownloadReport,
   getStateCity
 };
