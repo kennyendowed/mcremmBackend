@@ -500,7 +500,7 @@ async function DownloadReport(req, res){
       equipment:record.equipment,
       sN:record.sN,
       ref:record.ref,
-      author:author,
+      author:record.author,
       fleetNO:record.fleetNO,
       manufacturer:record.manufacturer,
       location:record.location,
