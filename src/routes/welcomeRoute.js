@@ -13,6 +13,7 @@ router.use(function(req, res, next) {
 
 router.get("/", controller.allAccess);
 router.get("/GetallCompany",[authJwt.verifyToken],controller.GetallCompany);
+router.get("/GetAllStatusCount",[authJwt.verifyToken],controller.GetAllStatusCount);
    router.get("/getCountry", controller.getCountry);
   router.get("/getCountryState/:id", controller.getCountryState);
 router.get("/getStateCity/:id/:state", controller.getStateCity);

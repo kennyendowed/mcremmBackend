@@ -397,49 +397,49 @@ async function GetAllStatusCount(req, res) {
       col: "companyName",
     });
 
-    ResultCollect["AllDUEDate"] = await surveyReport.findAndCountAll({
-      where: { nextInspDate: userDetail.department, RequestStatus: "Decline" },
-      distinct: false,
-      col: "initiatorStaff_id",
-    });
+    // ResultCollect["AllDUEDate"] = await surveyReport.findAndCountAll({
+    //   where: { nextInspDate: userDetail.department, RequestStatus: "Decline" },
+    //   distinct: false,
+    //   col: "initiatorStaff_id",
+    // });
 
-    ResultCollect["AllApprove"] = await ReassignmentRequest.findAndCountAll({
-      where: { RequestStatus: "Approve" },
-      distinct: false,
-      col: "initiatorStaff_id",
-    });
-    ResultCollect["AllDecline"] = await ReassignmentRequest.findAndCountAll({
-      where: { RequestStatus: "Decline" },
-      distinct: false,
-      col: "initiatorStaff_id",
-    });
-    ResultCollect["pendingRequest"] = await ReassignmentRequest.findAndCountAll(
-      {
-        where: {
-          initiatorStaff_id: userDetail.employeeID,
-          RequestStatus: "Pending",
-        },
-        distinct: true,
-        col: "initiatorStaff_id",
-      }
-    );
-    ResultCollect["FinconpendingRequest"] =
-      await ReassignmentRequest.findAndCountAll({
-        where: { RequestStatus: "Pending" },
-        distinct: false,
-        col: "initiatorStaff_id",
-      });
+    // ResultCollect["AllApprove"] = await ReassignmentRequest.findAndCountAll({
+    //   where: { RequestStatus: "Approve" },
+    //   distinct: false,
+    //   col: "initiatorStaff_id",
+    // });
+    // ResultCollect["AllDecline"] = await ReassignmentRequest.findAndCountAll({
+    //   where: { RequestStatus: "Decline" },
+    //   distinct: false,
+    //   col: "initiatorStaff_id",
+    // });
+    // ResultCollect["pendingRequest"] = await ReassignmentRequest.findAndCountAll(
+    //   {
+    //     where: {
+    //       initiatorStaff_id: userDetail.employeeID,
+    //       RequestStatus: "Pending",
+    //     },
+    //     distinct: true,
+    //     col: "initiatorStaff_id",
+    //   }
+    // );
+    // ResultCollect["FinconpendingRequest"] =
+    //   await ReassignmentRequest.findAndCountAll({
+    //     where: { RequestStatus: "Pending" },
+    //     distinct: false,
+    //     col: "initiatorStaff_id",
+    //   });
     //  console.log(ResultCollect)
     return res.status(200).send({
       status: "TRUE",
       code: 200,
       data: {
-        AllHODDecline: ResultCollect.AllHODDecline,
-        AllHODApprove: ResultCollect.AllHODApprove,
-        Decline: ResultCollect.AllDecline,
-        Approve: ResultCollect.AllApprove,
-        HodPendingRequest: ResultCollect.pendingRequest,
-        FinconpendingRequest: ResultCollect.FinconpendingRequest,
+        Allcompany: ResultCollect.Allcompany
+        // AllHODApprove: ResultCollect.AllHODApprove,
+        // Decline: ResultCollect.AllDecline,
+        // Approve: ResultCollect.AllApprove,
+        // HodPendingRequest: ResultCollect.pendingRequest,
+        // FinconpendingRequest: ResultCollect.FinconpendingRequest,
       },
     });
   } catch (error) {
