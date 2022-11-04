@@ -391,51 +391,26 @@ async function GetAllStatusCount(req, res) {
   var userDetail = await req.currentUser;
   var ResultCollect = [];
   try {
+    var currentDate = new Date();
+    const timew=new Date(currentDate.getTime());
     ResultCollect["Allcompany"] = await User.findAndCountAll({
       where: {   is_permission: "3"},
+      attributes: ["companyName","companydescription","companyphoneNumber"],
       distinct: true,
       col: "companyName",
     });
 
-    // ResultCollect["AllDUEDate"] = await surveyReport.findAndCountAll({
-    //   where: { nextInspDate: userDetail.department, RequestStatus: "Decline" },
-    //   distinct: false,
-    //   col: "initiatorStaff_id",
-    // });
-
-    // ResultCollect["AllApprove"] = await ReassignmentRequest.findAndCountAll({
-    //   where: { RequestStatus: "Approve" },
-    //   distinct: false,
-    //   col: "initiatorStaff_id",
-    // });
-    // ResultCollect["AllDecline"] = await ReassignmentRequest.findAndCountAll({
-    //   where: { RequestStatus: "Decline" },
-    //   distinct: false,
-    //   col: "initiatorStaff_id",
-    // });
-    // ResultCollect["pendingRequest"] = await ReassignmentRequest.findAndCountAll(
-    //   {
-    //     where: {
-    //       initiatorStaff_id: userDetail.employeeID,
-    //       RequestStatus: "Pending",
-    //     },
-    //     distinct: true,
-    //     col: "initiatorStaff_id",
-    //   }
-    // );
-    // ResultCollect["FinconpendingRequest"] =
-    //   await ReassignmentRequest.findAndCountAll({
-    //     where: { RequestStatus: "Pending" },
-    //     distinct: false,
-    //     col: "initiatorStaff_id",
-    //   });
-    //  console.log(ResultCollect)
+    ResultCollect["AllDUEDate"] = await surveyReport.findAndCountAll({
+      where: { nextInspDate:{ [Op.lte]: timew }},
+      distinct: false,
+      col: "companyName",
+    });
     return res.status(200).send({
       status: "TRUE",
       code: 200,
       data: {
-        Allcompany: ResultCollect.Allcompany
-        // AllHODApprove: ResultCollect.AllHODApprove,
+        Allcompany: ResultCollect.Allcompany,
+         AllDUEDate: ResultCollect.AllDUEDate
         // Decline: ResultCollect.AllDecline,
         // Approve: ResultCollect.AllApprove,
         // HodPendingRequest: ResultCollect.pendingRequest,
